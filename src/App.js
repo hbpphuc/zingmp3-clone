@@ -7,7 +7,7 @@ import routes from './utils/routes'
 function App() {
     return (
         <>
-            <div className="flex justify-center items-center">
+            <div className="w-full h-screen flex justify-center bg-[#162a45]">
                 <Routes>
                     <Route path={routes.PUBLIC} element={<Public />}>
                         <Route path={routes.HOME} element={<Home />} />
