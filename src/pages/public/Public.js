@@ -4,11 +4,11 @@ import { Sidebar } from '../../layouts'
 
 const Public = () => {
     return (
-        <div className="w-full flex overflow-y-auto">
-            <div className="w-[240px] bg-[#ffffff0d]">
+        <div className="w-full h-full flex overflow-y-auto relative">
+            <div className="w-[240px] h-full bg-[#ffffff0d] fixed">
                 <Sidebar />
             </div>
-            <div className="flex-1">
+            <div className="w-[calc(100%_-_240px)] absolute right-0">
                 <Outlet />
             </div>
         </div>

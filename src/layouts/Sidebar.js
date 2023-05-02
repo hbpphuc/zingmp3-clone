@@ -5,7 +5,7 @@ import { sidebarMenu } from '../utils/menu'
 
 const activeStyle = {
     common: 'px-[21px] py-3 flex items-center gap-3 text-sm font-medium',
-    active: 'bg-[#ffffff1a] text-[#ffffff] border-l-[3px] border-[#3b68ef]',
+    active: 'bg-[#ffffff1a] text-[#ffffff] border-l-[3px] border-[#9b4de0]',
     notActive: ' text-[#dadada] border-l-[3px] border-transparent hover:text-[#ffffff]',
 }
 
