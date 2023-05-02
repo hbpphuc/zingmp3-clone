@@ -5,14 +5,17 @@ import { Provider } from 'react-redux'
 import reduxConfig from './redux'
 import App from './App'
 import './index.css'
+import { PersistGate } from 'redux-persist/integration/react'
 
-const store = reduxConfig()
+const { store, persistor } = reduxConfig()
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
     <Provider store={store}>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
+        <PersistGate loading={null} persistor={persistor}>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </PersistGate>
     </Provider>,
 )
