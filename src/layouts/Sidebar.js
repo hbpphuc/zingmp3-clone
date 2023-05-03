@@ -1,7 +1,8 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { LogoDark, LogoLight } from '../assets/images/Images'
 import { sidebarMenu } from '../utils/menu'
+import routes from '../utils/routes'
 
 const activeStyle = {
     common: 'px-[21px] py-3 flex items-center gap-3 text-sm font-medium',
@@ -10,10 +11,13 @@ const activeStyle = {
 }
 
 const Sidebar = () => {
+    const navigate = useNavigate()
     return (
         <div className="flex flex-col">
-            <div className="w-full h-[70px] pl-7 pr-[25px] flex items-center ">
-                <LogoDark className="w-[120px] h-[40px] object-cover" />
+            <div className="w-full h-[70px] pl-7 pr-[25px] flex items-center">
+                <div className="cursor-pointer hover:opacity-90" onClick={() => navigate(routes.HOME)}>
+                    <LogoDark className="w-[120px] h-[40px] object-cover" />
+                </div>
             </div>
 
             <div className="flex flex-col">

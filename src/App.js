@@ -3,9 +3,9 @@ import { useDispatch } from 'react-redux'
 import { Routes, Route } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { Home, Login, Public } from './pages/public'
-import routes from './utils/routes'
 import * as homeAction from './store/actions/homeAction'
+import routes from './utils/routes'
+import { Home, Login, Public, Album } from './pages/public'
 
 function App() {
     const dispatch = useDispatch()
@@ -20,6 +20,8 @@ function App() {
                     <Route path={routes.PUBLIC} element={<Public />}>
                         <Route path={routes.HOME} element={<Home />} />
                         <Route path={routes.LOGIN} element={<Login />} />
+                        <Route path={routes.ALBUM_TITLE_ID} element={<Album />} />
+                        <Route path={routes.PLAYLIST_TITLE_ID} element={<Album />} />
                     </Route>
                 </Routes>
             </div>

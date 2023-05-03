@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import SSlider from 'react-slick'
 import * as actions from '../store/actions'
 
 const Slider = () => {
     const { banner } = useSelector((state) => state.app)
     const dispatch = useDispatch()
-    console.log(banner)
+    const navigate = useNavigate()
     // const [curr, setCurr] = useState({
     //     activeSlide: 0,
     //     activeSlide2: 0,
@@ -24,8 +25,13 @@ const Slider = () => {
     }
 
     const handleClickBanner = (item) => {
-        if (item?.type === 4) {
+        if (item?.type === 1) {
             dispatch(actions.setCurSongId(item.encodeId))
+            dispatch(actions.setPlaying(true))
+        } else if (item?.type === 4) {
+            const path = item?.link.split('.')[0]
+            navigate(path)
+        } else {
         }
     }
 

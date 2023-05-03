@@ -4,6 +4,12 @@
 
 
 @layer base {
+
+    :root {
+        --purple-primary: #9b4de0;
+        --text-purple: #c273ed;
+    }
+
     * {
         font-family: 'Inter', sans-serif;
         text-rendering: optimizeLegibility;
@@ -23,5 +29,30 @@
     html ::-webkit-scrollbar-track {
         -webkit-box-shadow: inset #fff;
         border-radius: 4px;
+    }
+}
+
+@layer components {
+    .purple-hover {
+        color: var(--text-purple);
+        text-decoration: underline;
+    }
+
+    .button-player {
+        background-color: #ffffff1d;
+        border-radius: 50%;
+    }
+
+    .play-pause-hover {
+        border-color: var(--text-purple);
+        color: var(--text-purple);
+    }
+
+    .thumbnailM-hover {
+        transform: scale(1.1) translateZ(0);
+    }
+
+    .transition-img {
+        transition: transform .7s;
     }
 }
