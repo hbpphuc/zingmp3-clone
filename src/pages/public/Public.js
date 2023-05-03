@@ -17,7 +17,7 @@ const Public = () => {
                     <Outlet />
                 </div>
             </div>
-            {false && (
+            {true && (
                 <div className="flex-none w-full h-[90px] px-5 relative left-0 right-0 bottom-0 bg-[#130c1c] text-white border-t-1 border-[#ffffff1a]">
                     <Player />
                 </div>

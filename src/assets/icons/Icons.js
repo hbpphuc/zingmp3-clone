@@ -6,6 +6,7 @@ import { RiHeartLine, RiHeartFill, RiMoreFill } from 'react-icons/ri'
 import { GiMicrophone } from 'react-icons/gi'
 import { SlVolumeOff, SlVolume2 } from 'react-icons/sl'
 import { FiMusic } from 'react-icons/fi'
+import { BsDot } from 'react-icons/bs'
 import {
     TbArrowsShuffle,
     TbRepeat,
@@ -39,6 +40,7 @@ const icons = {
     SlVolume2,
     GiMicrophone,
     FiMusic,
+    BsDot,
 }
 
 export default icons

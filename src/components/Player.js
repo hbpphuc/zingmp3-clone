@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect, useRef, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import * as musicApi from '../apis/musicApi'
+import * as musicAction from '../store/actions'
 import icons from '../assets/icons/Icons'
 
 const {
@@ -22,11 +23,10 @@ const {
 
 const Player = () => {
     const { curSongId, isPlaying } = useSelector((state) => state.music)
-    const [source, setSource] = useState()
-    const [songinfo, setSonginfo] = useState()
-    const audioEl = new Audio()
-
-    console.log(curSongId)
+    const dispatch = useDispatch()
+    const [source, setSource] = useState(null)
+    const [songinfo, setSonginfo] = useState(null)
+    const audioEl = useRef(new Audio())
 
     useEffect(() => {
         const fetchInfoSong = async () => {
@@ -40,27 +40,47 @@ const Player = () => {
                 setSonginfo(res2.data)
             }
         }
+
         fetchInfoSong()
     }, [curSongId])
 
+    useEffect(() => {
+        audioEl.current.pause()
+        audioEl.current.src = source
+        audioEl.current.load()
+        if (isPlaying) audioEl.current.play()
+        if (audioEl.current.ended) dispatch(musicAction.setPlaying(false))
+    }, [curSongId, source])
+
+    console.log(isPlaying)
+
     const handlePlaySong = () => {
-        // setPlaying((prev) => !prev)
+        if (isPlaying) {
+            audioEl.current.pause()
+            dispatch(musicAction.setPlaying(false))
+        } else {
+            audioEl.current.play()
+            dispatch(musicAction.setPlaying(true))
+        }
     }
 
     useEffect(() => {}, [curSongId])
 
     return (
         <div className="min-w-[768px] h-[90px] flex justify-between items-center cursor-pointer">
-            <div className="w-[30%] max-h-full flex-auto flex justify-start items-center border border-red-400">
+            <div className="w-[30%] max-h-full flex-auto flex justify-start items-center ">
                 <div className="w-16 h-16 mr-[10px] rounded bg-slate-300">
-                    <img src="" alt="" className="w-16 h-16 rounded object-cover" />
+                    <img src={songinfo?.thumbnail} alt={songinfo?.title} className="w-16 h-16 rounded object-cover" />
                 </div>
                 <div className="flex flex-col justify-center">
-                    <p className="pr-[10px] text-sm font-medium text-white">Song Name</p>
+                    <p className="w-full text-sm font-medium text-white whitespace-nowrap text-ellipsis overflow-hidden">
+                        {songinfo?.title}
+                    </p>
                     <div className="max-w-full mt-[1px] flex justify-start items-center whitespace-nowrap text-ellipsis overflow-hidden text-xs text-[#ffffff80]">
-                        <span className="hover:purple-hover">Singer 1</span>
+                        {/* <span className="hover:purple-hover">Singer 1</span>
                         <span>,&nbsp;</span>
-                        <span className="hover:purple-hover">Singer 2</span>
+                        <span className="hover:purple-hover">Singer 2</span> */}
+                        <span className="hover:purple-hover">{songinfo?.artistsNames}</span>
                     </div>
                 </div>
                 <div className="flex justify-between items-center ml-[10px]">
@@ -76,7 +96,7 @@ const Player = () => {
                     </div>
                 </div>
             </div>
-            <div className="w-[40%] max-h-full flex-auto flex flex-col justify-center items-center gap-2 border border-red-400">
+            <div className="w-[40%] max-h-full flex-auto flex flex-col justify-center items-center gap-2">
                 <div className="">
                     <div className="h-[50px] flex justify-center items-center gap-4">
                         <button className="w-[32px] h-[32px] flex justify-center items-center">

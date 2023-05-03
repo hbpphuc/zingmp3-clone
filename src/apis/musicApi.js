@@ -1,6 +1,6 @@
 import * as httpRequest from '../httpRequest'
 
-export const apiGetSong = async ({ songId }) => {
+export const apiGetSong = async (songId) => {
     try {
         const res = await httpRequest.get('song', {
             params: {
@@ -13,7 +13,7 @@ export const apiGetSong = async ({ songId }) => {
     }
 }
 
-export const apiGetInfoSong = async ({ songId }) => {
+export const apiGetInfoSong = async (songId) => {
     try {
         const res = await httpRequest.get('infosong', {
             params: {
