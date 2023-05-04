@@ -6,12 +6,6 @@ import icons from '../assets/icons/Icons'
 const { BsDot } = icons
 
 const AlbumSongList = ({ listSong }) => {
-    moment.updateLocale('vi')
-    const timeFormat = {
-        h: 'giờ',
-        m: 'phút',
-    }
-
     return (
         <div className="w-full mb-[10px] text-xs text-[#ffffff80] font-medium">
             <div className="w-full h-[46px] p-[10px] flex justify-between gap-[10px] items-center border-b border-[#ffffff0d]">
@@ -29,7 +23,10 @@ const AlbumSongList = ({ listSong }) => {
                 <span>
                     <BsDot size={20} />
                 </span>
-                <span>{moment.utc(listSong?.totalDuration * 1000).format(`h ${timeFormat.h} mm ${timeFormat.m}`)}</span>
+                <span>
+                    {moment.utc(listSong?.totalDuration * 1000).format('h')} giờ{' '}
+                    {moment.utc(listSong?.totalDuration * 1000).format('mm')} phút
+                </span>
             </div>
         </div>
     )

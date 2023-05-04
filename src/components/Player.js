@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import moment from 'moment'
+import { toast } from 'react-toastify'
 import * as musicApi from '../apis/musicApi'
 import * as musicAction from '../store/actions'
 import icons from '../assets/icons/Icons'
@@ -20,13 +22,17 @@ const {
     SlVolume2,
     GiMicrophone,
 } = icons
+let intervalId
 
 const Player = () => {
-    const { curSongId, isPlaying } = useSelector((state) => state.music)
+    const { curSongId, isPlaying, isVipSong } = useSelector((state) => state.music)
     const dispatch = useDispatch()
-    const [source, setSource] = useState(null)
     const [songinfo, setSonginfo] = useState(null)
-    const audioEl = useRef(new Audio())
+    const [audio, setAudio] = useState(new Audio())
+    const [curSecond, setCurSecond] = useState(0)
+
+    const thumbRef = useRef()
+    const trackRef = useRef()
 
     useEffect(() => {
         const fetchInfoSong = async () => {
@@ -34,10 +40,16 @@ const Player = () => {
             const res2 = await musicApi.apiGetInfoSong(curSongId)
 
             if (res1?.err === 0) {
-                setSource(res1.data['128'])
-            }
-            if (res2?.err === 0) {
-                setSonginfo(res2.data)
+                audio.pause()
+                dispatch(musicAction.vipSong(false))
+                setAudio(new Audio(res1.data['128']))
+                audio.load()
+                if (res2?.err === 0) {
+                    setSonginfo(res2.data)
+                }
+            } else {
+                toast.warning(res1.msg)
+                dispatch(musicAction.vipSong(true))
             }
         }
 
@@ -45,26 +57,37 @@ const Player = () => {
     }, [curSongId])
 
     useEffect(() => {
-        audioEl.current.pause()
-        audioEl.current.src = source
-        audioEl.current.load()
-        if (isPlaying) audioEl.current.play()
-        if (audioEl.current.ended) dispatch(musicAction.setPlaying(false))
-    }, [curSongId, source])
+        if (isPlaying) {
+            audio.play()
+            intervalId = setInterval(() => {
+                let percent = Math.round((audio?.currentTime * 10000) / songinfo.duration) / 100
+                thumbRef.current.style.cssText = `right: ${100 - percent}%`
+                setCurSecond(Math.round(audio?.currentTime))
+            }, 200)
+        }
 
-    console.log(isPlaying)
+        return () => {
+            intervalId && clearInterval(intervalId)
+        }
+    }, [audio, isPlaying])
 
     const handlePlaySong = () => {
         if (isPlaying) {
-            audioEl.current.pause()
+            audio.pause()
             dispatch(musicAction.setPlaying(false))
         } else {
-            audioEl.current.play()
+            audio.play()
             dispatch(musicAction.setPlaying(true))
         }
     }
 
-    useEffect(() => {}, [curSongId])
+    const handleChangeProgress = (e) => {
+        const trackRect = trackRef.current.getBoundingClientRect()
+        const percent = Math.round(((e.clientX - trackRect.left) * 10000) / trackRect.width) / 100
+        thumbRef.current.style.cssText = `right: ${100 - percent}%`
+        audio.currentTime = (songinfo.duration * percent) / 100
+        setCurSecond(Math.round((songinfo.duration * percent) / 100))
+    }
 
     return (
         <div className="min-w-[768px] h-[90px] flex justify-between items-center cursor-pointer">
@@ -125,7 +148,24 @@ const Player = () => {
                         </button>
                     </div>
                 </div>
-                <div className="h-1/2">progress bar</div>
+                <div className="w-full h-[15px] mb-[5px] flex items-center justify-around">
+                    <span className="text-xs font-medium opacity-50">
+                        {moment.utc(curSecond * 1000).format('mm:ss')}
+                    </span>
+                    <div className="w-4/5 h-[15px] flex items-center relative">
+                        <div
+                            ref={trackRef}
+                            onClick={handleChangeProgress}
+                            className="w-full h-[3px] bg-[#ffffff4d] flex items-center rounded absolute left-0 hover:h-[6px]"
+                        >
+                            <div
+                                ref={thumbRef}
+                                className="thumb absolute top-0 bottom-0 left-0 bg-[#ffffff] rounded"
+                            ></div>
+                        </div>
+                    </div>
+                    <span className="text-xs font-medium">{moment.utc(songinfo?.duration * 1000).format('mm:ss')}</span>
+                </div>
             </div>
             <div className="w-[30%] max-h-full flex-auto border border-red-400">player tool</div>
         </div>

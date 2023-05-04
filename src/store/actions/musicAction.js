@@ -3,3 +3,4 @@ import * as homeApi from '../../apis/homeApi'
 
 export const setCurSongId = (songId) => ({ type: actionTypes.SET_CUR_SONG_ID, songId })
 export const setPlaying = (flag) => ({ type: actionTypes.PLAY, flag })
+export const vipSong = (flag) => ({ type: actionTypes.VIPSONG, flag })

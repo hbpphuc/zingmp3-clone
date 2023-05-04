@@ -55,4 +55,8 @@
     .transition-img {
         transition: transform .7s;
     }
+
+    .progressbar:hover .thumb {
+        height: 5px;
+    }
 }

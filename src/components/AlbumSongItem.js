@@ -29,15 +29,7 @@ const AlbumSongItem = ({ songData }) => {
                             {songData.title}
                         </p>
                         <div className="max-w-full mt-[1px] flex justify-start items-center text-xs text-[#ffffff80]">
-                            {/* {songData?.artists.map((artist) => (
-                                <span key={artist.encodeId} className="hover:purple-hover">
-                                    {artist.name + ', '}
-                                </span>
-                            ))} */}
                             <span className="hover:purple-hover">{songData.artistsNames}</span>
-                            {/* <span className="hover:purple-hover">Singer 1</span>
-                            <span>,&nbsp;</span>
-                            <span className="hover:purple-hover">Singer 2</span> */}
                         </div>
                     </div>
                 </div>
