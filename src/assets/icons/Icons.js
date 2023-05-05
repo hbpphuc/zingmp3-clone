@@ -7,6 +7,7 @@ import { GiMicrophone } from 'react-icons/gi'
 import { SlVolumeOff, SlVolume2 } from 'react-icons/sl'
 import { FiMusic } from 'react-icons/fi'
 import { BsDot } from 'react-icons/bs'
+import { MdOutlineArrowForwardIos } from 'react-icons/md'
 import {
     TbArrowsShuffle,
     TbRepeat,
@@ -41,6 +42,7 @@ const icons = {
     GiMicrophone,
     FiMusic,
     BsDot,
+    MdOutlineArrowForwardIos,
 }
 
 export default icons

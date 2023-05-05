@@ -1,13 +1,11 @@
 import React, { useEffect } from 'react'
-import { Header } from '../../layouts'
-import { Slider } from '../../components'
+import { Slider, Playlist } from '../../components'
 
 const Home = () => {
     return (
-        <div className="h-[1000px] overflow-y-auto">
-            <div className="w-full px-[59px] mt-[70px]">
-                <Slider />
-            </div>
+        <div className="h-[1000px] mt-[70px] px-[59px] overflow-y-auto">
+            <Slider />
+            <Playlist />
         </div>
     )
 }

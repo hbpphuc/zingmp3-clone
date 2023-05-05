@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import moment from 'moment/moment'
+import { useDispatch } from 'react-redux'
 import * as musicApi from '../../apis/musicApi'
+import * as musicAction from '../../store/actions'
 import { AlbumSongList } from '../../components'
 
 const Album = () => {
     const { title, pid } = useParams()
     const [playlistData, setPlaylistData] = useState({})
+    const dispatch = useDispatch()
 
     useEffect(() => {
         const fetchDetailPlaylist = async () => {
             const res = await musicApi.apiGetDetailPlaylist(pid)
             if (res?.err === 0) {
                 setPlaylistData(res.data)
+                dispatch(musicAction.setPlaylist(res?.data?.song.items))
             }
         }
 
@@ -52,7 +56,7 @@ const Album = () => {
                         <span className="text-sm text-[#ffffff80]">Lời tựa </span>
                         <span className="text-sm text-white">{playlistData.sortDescription}</span>
                     </div>
-                    <AlbumSongList listSong={playlistData?.song} />
+                    <AlbumSongList />
                 </div>
             </div>
             <div>ARTIST CHANNEL</div>

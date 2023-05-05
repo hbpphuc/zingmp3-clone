@@ -1,11 +1,13 @@
 import React, { memo } from 'react'
 import moment from 'moment'
+import { useSelector } from 'react-redux'
 import AlbumSongItem from './AlbumSongItem'
 import icons from '../assets/icons/Icons'
 
 const { BsDot } = icons
 
-const AlbumSongList = ({ listSong }) => {
+const AlbumSongList = () => {
+    const { listSong } = useSelector((state) => state.music)
     return (
         <div className="w-full mb-[10px] text-xs text-[#ffffff80] font-medium">
             <div className="w-full h-[46px] p-[10px] flex justify-between gap-[10px] items-center border-b border-[#ffffff0d]">
@@ -14,7 +16,7 @@ const AlbumSongList = ({ listSong }) => {
                 <span className="w-[10%] flex justify-end ">THỜI GIAN</span>
             </div>
             <div>
-                {listSong?.items.map((item) => (
+                {listSong.map((item) => (
                     <AlbumSongItem key={item.encodeId} songData={item} />
                 ))}
             </div>

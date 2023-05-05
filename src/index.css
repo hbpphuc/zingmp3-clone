@@ -33,7 +33,12 @@
 }
 
 @layer components {
+
     .purple-hover {
+        color: var(--text-purple);
+    }
+
+    .text-purple-hover {
         color: var(--text-purple);
         text-decoration: underline;
     }
@@ -59,4 +64,16 @@
     .progressbar:hover .thumb {
         height: 5px;
     }
+
+}
+
+.slick-list,
+.slick-track {
+    display: flex !important;
+    justify-content: space-between;
+    max-height: 100% !important;
+}
+
+.slick-slide {
+    margin: 0 10px !important;
 }

@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { memo, useEffect, useRef, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import moment from 'moment'
 import { toast } from 'react-toastify'
+import { useDebounce } from 'use-debounce'
+import moment from 'moment'
 import * as musicApi from '../apis/musicApi'
 import * as musicAction from '../store/actions'
 import icons from '../assets/icons/Icons'
@@ -25,11 +26,14 @@ const {
 let intervalId
 
 const Player = () => {
-    const { curSongId, isPlaying, isVipSong } = useSelector((state) => state.music)
+    const { curSongId, isPlaying, isVipSong, listSong } = useSelector((state) => state.music)
     const dispatch = useDispatch()
     const [songinfo, setSonginfo] = useState(null)
     const [audio, setAudio] = useState(new Audio())
     const [curSecond, setCurSecond] = useState(0)
+    const [shuffle, setShuffle] = useState(false)
+
+    const [debounceSongId] = useDebounce(curSongId, 500)
 
     const thumbRef = useRef()
     const trackRef = useRef()
@@ -54,7 +58,7 @@ const Player = () => {
         }
 
         fetchInfoSong()
-    }, [curSongId])
+    }, [debounceSongId])
 
     useEffect(() => {
         if (isPlaying) {
@@ -89,6 +93,36 @@ const Player = () => {
         setCurSecond(Math.round((songinfo.duration * percent) / 100))
     }
 
+    const handleNextSong = () => {
+        if (listSong) {
+            let curSongIndex
+            listSong?.forEach((item, index) => {
+                if (item.encodeId === curSongId) {
+                    curSongIndex = index
+                }
+            })
+            console.log(curSongIndex)
+            dispatch(musicAction.setCurSongId(listSong[curSongIndex + 1].encodeId))
+            dispatch(musicAction.setPlaying(true))
+        }
+    }
+
+    const handlePrevSong = () => {
+        if (listSong) {
+            let curSongIndex
+            listSong?.forEach((item, index) => {
+                if (item.encodeId === curSongId) {
+                    curSongIndex = index
+                }
+            })
+            console.log(curSongIndex)
+            dispatch(musicAction.setCurSongId(listSong[curSongIndex - 1].encodeId))
+            dispatch(musicAction.setPlaying(true))
+        }
+    }
+
+    const handleShuffleSong = () => {}
+
     return (
         <div className="min-w-[768px] h-[90px] flex justify-between items-center cursor-pointer">
             <div className="w-[30%] max-h-full flex-auto flex justify-start items-center ">
@@ -100,10 +134,7 @@ const Player = () => {
                         {songinfo?.title}
                     </p>
                     <div className="max-w-full mt-[1px] flex justify-start items-center whitespace-nowrap text-ellipsis overflow-hidden text-xs text-[#ffffff80]">
-                        {/* <span className="hover:purple-hover">Singer 1</span>
-                        <span>,&nbsp;</span>
-                        <span className="hover:purple-hover">Singer 2</span> */}
-                        <span className="hover:purple-hover">{songinfo?.artistsNames}</span>
+                        <span className="hover:text-purple-hover">{songinfo?.artistsNames}</span>
                     </div>
                 </div>
                 <div className="flex justify-between items-center ml-[10px]">
@@ -125,7 +156,7 @@ const Player = () => {
                         <button className="w-[32px] h-[32px] flex justify-center items-center">
                             <TbArrowsShuffle className="w-full h-full p-[7px] hover:button-player" />
                         </button>
-                        <button className="w-[32px] h-[32px] flex justify-center items-center">
+                        <button onClick={handlePrevSong} className="w-[32px] h-[32px] flex justify-center items-center">
                             <TbPlayerSkipBackFilled className="w-full h-full p-[7px] hover:button-player" />
                         </button>
                         <div
@@ -140,7 +171,10 @@ const Player = () => {
                                 )}
                             </button>
                         </div>
-                        <button className="w-[32px] h-[32px] flex justify-center items-center">
+                        <button
+                            onClick={handleNextSong}
+                            className="w-[32px] h-[32px] flex justify-center items-center disabled:cursor-not-allowed select-none"
+                        >
                             <TbPlayerSkipForwardFilled className="w-full h-full p-[7px] hover:button-player" />
                         </button>
                         <button className="w-[32px] h-[32px] flex justify-center items-center">
@@ -172,4 +206,4 @@ const Player = () => {
     )
 }
 
-export default Player
+export default memo(Player)
