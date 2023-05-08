@@ -8,6 +8,8 @@ const { BsDot } = icons
 
 const AlbumSongList = () => {
     const { listSong } = useSelector((state) => state.music)
+    let totalSongDuration = listSong.reduce((acc, curr) => acc + curr.duration, 0)
+
     return (
         <div className="w-full mb-[10px] text-xs text-[#ffffff80] font-medium">
             <div className="w-full h-[46px] p-[10px] flex justify-between gap-[10px] items-center border-b border-[#ffffff0d]">
@@ -21,13 +23,13 @@ const AlbumSongList = () => {
                 ))}
             </div>
             <div className="w-full mt-4 flex items-center text-[#ffffff80] text-[13px] leading-[18px]">
-                <span>{listSong?.total} bài hát</span>
+                <span>{listSong.length} bài hát</span>
                 <span>
                     <BsDot size={20} />
                 </span>
                 <span>
-                    {moment.utc(listSong?.totalDuration * 1000).format('h')} giờ{' '}
-                    {moment.utc(listSong?.totalDuration * 1000).format('mm')} phút
+                    {moment.utc(totalSongDuration * 1000).format('h') + ' giờ'}{' '}
+                    {moment.utc(totalSongDuration * 1000).format('mm') + ` phút`}
                 </span>
             </div>
         </div>

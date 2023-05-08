@@ -17,6 +17,32 @@ module.exports = {
             transitionEffect: {
                 'scale-thumb': 'transform .7s',
             },
+            keyframes: {
+                'rotate-center': {
+                    '0%': {
+                        '-webkit-transform': 'rotate(0)',
+                        transform: 'rotate(0)',
+                    },
+                    '100%': {
+                        '-webkit-transform': 'rotate(360deg)',
+                        transform: 'rotate(360deg)',
+                    },
+                },
+                'rotate-center-pause': {
+                    '0%': {
+                        '-webkit-transform': 'rotate(360deg)',
+                        transform: 'rotate(360deg)',
+                    },
+                    '100%': {
+                        '-webkit-transform': 'rotate(0deg)',
+                        transform: 'rotate(0deg)',
+                    },
+                },
+            },
+            animation: {
+                'rotate-center': 'rotate-center 20s linear infinite',
+                'rotate-center-pause': 'rotate-center 5s linear infinite',
+            },
         },
     },
     plugins: [],

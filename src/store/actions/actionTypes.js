@@ -5,6 +5,7 @@ const actionTypes = {
     // music
     PLAY: 'PLAY',
     VIPSONG: 'VIPSONG',
+    PLAYLIST: 'PLAYLIST',
 }
 
 export default actionTypes

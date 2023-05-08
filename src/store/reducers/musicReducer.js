@@ -4,6 +4,7 @@ const initState = {
     curSongId: null,
     isPlaying: false,
     isVipSong: false,
+    listSong: [],
 }
 
 const musicReducer = (state = initState, action) => {
@@ -22,6 +23,11 @@ const musicReducer = (state = initState, action) => {
             return {
                 ...state,
                 isVipSong: action.flag,
+            }
+        case actionTypes.PLAYLIST:
+            return {
+                ...state,
+                listSong: action.listSong || null,
             }
 
         default:

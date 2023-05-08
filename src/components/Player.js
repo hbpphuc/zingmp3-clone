@@ -2,6 +2,8 @@ import React, { memo, useEffect, useRef, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
 import { useDebounce } from 'use-debounce'
+import Tippy from '@tippyjs/react'
+import 'tippy.js/dist/tippy.css'
 import moment from 'moment'
 import * as musicApi from '../apis/musicApi'
 import * as musicAction from '../store/actions'
@@ -32,6 +34,7 @@ const Player = () => {
     const [audio, setAudio] = useState(new Audio())
     const [curSecond, setCurSecond] = useState(0)
     const [shuffle, setShuffle] = useState(false)
+    const [repeat, setRepeat] = useState(0)
 
     const [debounceSongId] = useDebounce(curSongId, 500)
 
@@ -75,6 +78,26 @@ const Player = () => {
         }
     }, [audio, isPlaying])
 
+    useEffect(() => {
+        const handleEnded = () => {
+            audio.pause()
+            console.log('ended', { shuffle })
+            if (shuffle) {
+                handleShuffleSong()
+            } else if (repeat) {
+                repeat === 1 ? handleRepeatOne() : handleNextSong()
+            } else {
+                handleNextSong()
+            }
+        }
+
+        audio.addEventListener('ended', handleEnded)
+
+        return () => {
+            audio.removeEventListener('ended', handleEnded)
+        }
+    }, [audio, shuffle, repeat])
+
     const handlePlaySong = () => {
         if (isPlaying) {
             audio.pause()
@@ -94,6 +117,7 @@ const Player = () => {
     }
 
     const handleNextSong = () => {
+        audio.play()
         if (listSong) {
             let curSongIndex
             listSong?.forEach((item, index) => {
@@ -101,7 +125,6 @@ const Player = () => {
                     curSongIndex = index
                 }
             })
-            console.log(curSongIndex)
             dispatch(musicAction.setCurSongId(listSong[curSongIndex + 1].encodeId))
             dispatch(musicAction.setPlaying(true))
         }
@@ -115,13 +138,21 @@ const Player = () => {
                     curSongIndex = index
                 }
             })
-            console.log(curSongIndex)
             dispatch(musicAction.setCurSongId(listSong[curSongIndex - 1].encodeId))
             dispatch(musicAction.setPlaying(true))
         }
     }
 
-    const handleShuffleSong = () => {}
+    const handleShuffleSong = () => {
+        const randomIndex = Math.round(Math.random() * listSong.length) - 1
+        dispatch(musicAction.setCurSongId(listSong[randomIndex].encodeId))
+        dispatch(musicAction.setPlaying(true))
+        audio.play()
+    }
+
+    const handleRepeatOne = () => {
+        audio.play()
+    }
 
     return (
         <div className="min-w-[768px] h-[90px] flex justify-between items-center cursor-pointer">
@@ -139,23 +170,32 @@ const Player = () => {
                 </div>
                 <div className="flex justify-between items-center ml-[10px]">
                     <div className="w-9 h-8 flex justify-center items-center">
-                        <button className="w-[32px] h-[32px] flex justify-center items-center">
-                            <RiHeartLine className="w-full h-full p-[7px] hover:button-player" />
-                        </button>
+                        <Tippy content="Thêm vào thư viện" className="text-xs">
+                            <button className="w-[32px] h-[32px] flex justify-center items-center">
+                                <RiHeartLine className="w-full h-full p-[7px] hover:button-player" />
+                            </button>
+                        </Tippy>
                     </div>
                     <div className="w-9 h-8 flex justify-center items-center">
-                        <button className="w-[32px] h-[32px] flex justify-center items-center">
-                            <RiMoreFill className="w-full h-full p-[7px] hover:button-player" />
-                        </button>
+                        <Tippy content="Xem thêm" className="text-xs">
+                            <button className="w-[32px] h-[32px] flex justify-center items-center">
+                                <RiMoreFill className="w-full h-full p-[7px] hover:button-player" />
+                            </button>
+                        </Tippy>
                     </div>
                 </div>
             </div>
             <div className="w-[40%] max-h-full flex-auto flex flex-col justify-center items-center gap-2">
                 <div className="">
                     <div className="h-[50px] flex justify-center items-center gap-4">
-                        <button className="w-[32px] h-[32px] flex justify-center items-center">
-                            <TbArrowsShuffle className="w-full h-full p-[7px] hover:button-player" />
-                        </button>
+                        <Tippy content="Bật phát ngẫu nhiên" className="text-xs">
+                            <button className="w-[32px] h-[32px] flex justify-center items-center">
+                                <TbArrowsShuffle
+                                    onClick={() => setShuffle((prev) => !prev)}
+                                    className={`w-full h-full p-[7px] hover:button-player ${shuffle && 'purple-hover'}`}
+                                />
+                            </button>
+                        </Tippy>
                         <button onClick={handlePrevSong} className="w-[32px] h-[32px] flex justify-center items-center">
                             <TbPlayerSkipBackFilled className="w-full h-full p-[7px] hover:button-player" />
                         </button>
@@ -177,9 +217,28 @@ const Player = () => {
                         >
                             <TbPlayerSkipForwardFilled className="w-full h-full p-[7px] hover:button-player" />
                         </button>
-                        <button className="w-[32px] h-[32px] flex justify-center items-center">
-                            <TbRepeat className="w-full h-full p-[7px] hover:button-player" />
-                        </button>
+                        <Tippy content="Bật phát lại tất cả" className="text-xs">
+                            <button
+                                onClick={() => {
+                                    setRepeat((prev) => (prev === 2 ? 0 : prev + 1))
+                                }}
+                                className="w-[32px] h-[32px] flex justify-center items-center"
+                            >
+                                {repeat === 1 ? (
+                                    <TbRepeatOnce
+                                        className={`w-full h-full p-[7px] hover:button-player ${
+                                            repeat && 'purple-hover'
+                                        }`}
+                                    />
+                                ) : (
+                                    <TbRepeat
+                                        className={`w-full h-full p-[7px] hover:button-player ${
+                                            repeat && 'purple-hover'
+                                        }`}
+                                    />
+                                )}
+                            </button>
+                        </Tippy>
                     </div>
                 </div>
                 <div className="w-full h-[15px] mb-[5px] flex items-center justify-around">
