@@ -17,6 +17,9 @@ module.exports = {
             transitionEffect: {
                 'scale-thumb': 'transform .7s',
             },
+            backgroundColor: {
+                'active-song': '#ffffff26',
+            },
             keyframes: {
                 'rotate-center': {
                     '0%': {

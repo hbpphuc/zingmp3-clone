@@ -65,6 +65,10 @@
         height: 5px;
     }
 
+    .active-song {
+        background-color: #ffffff26;
+    }
+
 }
 
 .slick-list,

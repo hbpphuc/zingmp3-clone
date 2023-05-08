@@ -8,6 +8,7 @@ import moment from 'moment'
 import * as musicApi from '../apis/musicApi'
 import * as musicAction from '../store/actions'
 import icons from '../assets/icons/Icons'
+import { RotatingLines } from 'react-loader-spinner'
 
 const {
     RiHeartLine,
@@ -20,10 +21,12 @@ const {
     TbPlayerPlayFilled,
     TbPlayerSkipBackFilled,
     TbPlayerSkipForwardFilled,
+    MdMusicVideo,
     TbPictureInPicture,
     SlVolumeOff,
     SlVolume2,
-    GiMicrophone,
+    TbMicrophone2,
+    MdOutlineQueueMusic,
 } = icons
 let intervalId
 
@@ -35,17 +38,24 @@ const Player = () => {
     const [curSecond, setCurSecond] = useState(0)
     const [shuffle, setShuffle] = useState(false)
     const [repeat, setRepeat] = useState(0)
+    const [loading, setLoading] = useState(false)
+    const [volume, setVolume] = useState(1)
 
     const [debounceSongId] = useDebounce(curSongId, 500)
 
     const thumbRef = useRef()
     const trackRef = useRef()
+    const volumeTrackRef = useRef()
+    const volumeThumbRef = useRef()
+
+    // console.log(typeof volumeRef.current.getAttribute('aria-valuenow'))
 
     useEffect(() => {
         const fetchInfoSong = async () => {
+            setLoading(true)
             const res1 = await musicApi.apiGetSong(curSongId)
             const res2 = await musicApi.apiGetInfoSong(curSongId)
-
+            setLoading(false)
             if (res1?.err === 0) {
                 audio.pause()
                 dispatch(musicAction.vipSong(false))
@@ -97,6 +107,24 @@ const Player = () => {
             audio.removeEventListener('ended', handleEnded)
         }
     }, [audio, shuffle, repeat])
+
+    useEffect(() => {
+        const volumeTrack = volumeTrackRef.current
+        const handleChangeVolume = (e) => {
+            const trackRect = volumeTrackRef.current.getBoundingClientRect()
+            const percent = Math.floor(((e.clientX - trackRect.left) * 100) / trackRect.width)
+            setVolume(percent / 100)
+
+            volumeThumbRef.current.style.cssText = `right: ${100 - percent}%`
+        }
+
+        volumeTrack?.addEventListener('click', handleChangeVolume)
+        audio.volume = volume
+
+        return () => {
+            volumeTrack?.removeEventListener('click', handleChangeVolume)
+        }
+    }, [volume])
 
     const handlePlaySong = () => {
         if (isPlaying) {
@@ -204,7 +232,16 @@ const Player = () => {
                             className="w-[40px] h-[40px] p-[5px] flex justify-center items-center rounded-full border-2 border-white hover:play-pause-hover"
                         >
                             <button className="w-full h-full flex justify-center items-center">
-                                {isPlaying ? (
+                                {loading ? (
+                                    <RotatingLines
+                                        strokeColor="#fff"
+                                        strokeWidth="5"
+                                        animationDuration="0.75"
+                                        width="40"
+                                        visible={true}
+                                        className="p-[3px]"
+                                    />
+                                ) : isPlaying ? (
                                     <TbPlayerPauseFilled className="w-full h-full p-[3px]" />
                                 ) : (
                                     <TbPlayerPlayFilled className="w-full h-full p-[3px]" />
@@ -260,7 +297,52 @@ const Player = () => {
                     <span className="text-xs font-medium">{moment.utc(songinfo?.duration * 1000).format('mm:ss')}</span>
                 </div>
             </div>
-            <div className="w-[30%] max-h-full flex-auto border border-red-400">player tool</div>
+            <div className="w-[30%] max-h-full flex-auto flex justify-end items-center">
+                <Tippy content="MV" className="text-xs">
+                    <button className="w-[40px] h-[36px] flex justify-center items-center">
+                        <MdMusicVideo className="w-full h-full p-[7px] hover:button-player" />
+                    </button>
+                </Tippy>
+                <Tippy content="Xem lời bài hát" className="text-xs">
+                    <button className="w-[36px] h-[32px] flex justify-center items-center">
+                        <TbMicrophone2 className="w-full h-full p-[8px] hover:button-player" />
+                    </button>
+                </Tippy>
+                <Tippy content="Chế độ cửa sổ" className="text-xs">
+                    <button className="w-[36px] h-[32px] flex justify-center items-center">
+                        <TbPictureInPicture className="w-full h-full p-[8px] hover:button-player" />
+                    </button>
+                </Tippy>
+                <div className="flex justify-center items-center mr-5">
+                    <button
+                        className="w-[36px] h-[32px] flex justify-center items-center"
+                        onClick={() => (volume === 1 ? setVolume(0) : setVolume(1))}
+                    >
+                        {volume > 0 ? (
+                            <SlVolume2 className="w-full h-full p-[8px] hover:button-player" />
+                        ) : (
+                            <SlVolumeOff className="w-full h-full p-[8px] hover:button-player" />
+                        )}
+                    </button>
+                    <div className="w-[70px] h-[15px] flex items-center relative">
+                        <div
+                            ref={volumeTrackRef}
+                            className="w-[70px] h-[3px] bg-[#ffffff4d] flex items-center rounded absolute left-0 hover:h-[6px]"
+                        >
+                            <div
+                                ref={volumeThumbRef}
+                                className={`thumb absolute top-0 bottom-0 left-0 
+                                ${volume === 0 && 'right-full'} bg-[#ffffff] rounded`}
+                            ></div>
+                        </div>
+                    </div>
+                </div>
+                <Tippy content="Danh sách phát" className="text-xs ml-5">
+                    <button className="w-[30px] h-[30px] flex justify-center items-center rounded bg-[#ffffff1a] hover:bg-[#ffffff33]">
+                        <MdOutlineQueueMusic className="w-full h-full p-[5px] " />
+                    </button>
+                </Tippy>
+            </div>
         </div>
     )
 }

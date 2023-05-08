@@ -3,11 +3,10 @@ import { TbChartDots2 } from 'react-icons/tb'
 import { VscArrowLeft, VscArrowRight } from 'react-icons/vsc'
 import { TfiSearch } from 'react-icons/tfi'
 import { RiHeartLine, RiHeartFill, RiMoreFill } from 'react-icons/ri'
-import { GiMicrophone } from 'react-icons/gi'
 import { SlVolumeOff, SlVolume2 } from 'react-icons/sl'
 import { FiMusic } from 'react-icons/fi'
 import { BsDot } from 'react-icons/bs'
-import { MdOutlineArrowForwardIos } from 'react-icons/md'
+import { MdOutlineArrowForwardIos, MdMusicVideo, MdOutlineQueueMusic } from 'react-icons/md'
 import {
     TbArrowsShuffle,
     TbRepeat,
@@ -17,6 +16,7 @@ import {
     TbPlayerSkipBackFilled,
     TbPlayerSkipForwardFilled,
     TbPictureInPicture,
+    TbMicrophone2,
 } from 'react-icons/tb'
 
 const icons = {
@@ -39,7 +39,9 @@ const icons = {
     TbPictureInPicture,
     SlVolumeOff,
     SlVolume2,
-    GiMicrophone,
+    TbMicrophone2,
+    MdMusicVideo,
+    MdOutlineQueueMusic,
     FiMusic,
     BsDot,
     MdOutlineArrowForwardIos,

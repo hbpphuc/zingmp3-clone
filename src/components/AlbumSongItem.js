@@ -1,12 +1,13 @@
 import React, { memo } from 'react'
 import moment from 'moment'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import icons from '../assets/icons/Icons'
 import * as musicAction from '../store/actions/'
 
 const { FiMusic } = icons
 
 const AlbumSongItem = ({ songData }) => {
+    const { curSongId } = useSelector((state) => state.music)
     const dispatch = useDispatch()
     return (
         <div
@@ -14,7 +15,9 @@ const AlbumSongItem = ({ songData }) => {
                 dispatch(musicAction.setCurSongId(songData?.encodeId))
                 dispatch(musicAction.setPlaying(true))
             }}
-            className="w-full h-[60px] p-[10px] flex justify-between items-center gap-[10px] rounded-[5px] hover:bg-[#ffffff1a] active:bg-[#ffffff26] border-b border-[#ffffff0d] cursor-pointer"
+            className={`w-full h-[60px] p-[10px] flex justify-between items-center gap-[10px] rounded-[5px] hover:bg-[#ffffff1a] ${
+                curSongId === songData?.encodeId ? 'bg-active-song' : ''
+            } border-b border-[#ffffff0d] cursor-pointer`}
         >
             <div className="flex-auto flex justify-start items-center">
                 <span className="w-[14px] mr-[10px] flex items-center text-[#ffffff80]">
