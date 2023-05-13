@@ -1,19 +1,18 @@
 @tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-
 @layer base {
-
     :root {
         --purple-primary: #9b4de0;
         --text-purple: #c273ed;
     }
 
     * {
-        font-family: 'Inter', sans-serif;
+        font-family: "Inter", sans-serif;
         text-rendering: optimizeLegibility;
         -webkit-font-smoothing: antialiased;
+    }
+
+    html {
+        overflow-y: overlay;
     }
 
     html ::-webkit-scrollbar {
@@ -23,7 +22,7 @@
     html ::-webkit-scrollbar-thumb {
         border-radius: 4px;
         background-color: #ffffff4d;
-        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .5);
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
     }
 
     html ::-webkit-scrollbar-track {
@@ -32,8 +31,8 @@
     }
 }
 
+@tailwind components;
 @layer components {
-
     .purple-hover {
         color: var(--text-purple);
     }
@@ -58,7 +57,7 @@
     }
 
     .transition-img {
-        transition: transform .7s;
+        transition: transform 0.7s;
     }
 
     .progressbar:hover .thumb {
@@ -68,7 +67,6 @@
     .active-song {
         background-color: #ffffff26;
     }
-
 }
 
 .slick-list,
@@ -81,3 +79,13 @@
 .slick-slide {
     margin: 0 10px !important;
 }
+
+.btn {
+    @apply mr-[15px] py-1 px-6 rounded-full text-xs font-normal uppercase border border-[#ffffff1a] hover:opacity-90 bg-transparent;
+}
+
+.btn-active {
+    @apply border-[#9b4de0] hover:opacity-90 bg-[#9b4de0] text-white;
+}
+
+@tailwind utilities;

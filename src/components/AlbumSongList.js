@@ -8,7 +8,7 @@ const { BsDot } = icons
 
 const AlbumSongList = () => {
     const { listSong } = useSelector((state) => state.music)
-    let totalSongDuration = listSong.reduce((acc, curr) => acc + curr.duration, 0)
+    let totalSongDuration = listSong?.reduce((acc, curr) => acc + curr.duration, 0)
 
     return (
         <div className="w-full mb-[10px] text-xs text-[#ffffff80] font-medium">
@@ -18,12 +18,12 @@ const AlbumSongList = () => {
                 <span className="w-[10%] flex justify-end ">THỜI GIAN</span>
             </div>
             <div>
-                {listSong.map((item) => (
+                {listSong?.map((item) => (
                     <AlbumSongItem key={item.encodeId} songData={item} />
                 ))}
             </div>
             <div className="w-full mt-4 flex items-center text-[#ffffff80] text-[13px] leading-[18px]">
-                <span>{listSong.length} bài hát</span>
+                <span>{listSong?.length} bài hát</span>
                 <span>
                     <BsDot size={20} />
                 </span>

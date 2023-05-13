@@ -5,24 +5,24 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Audio } from 'react-loader-spinner'
 import * as musicApi from '../../apis/musicApi'
 import * as musicAction from '../../store/actions'
-import { AlbumSongList } from '../../components'
+import { AlbumSongList, Loading } from '../../components'
 import icons from '../../assets/icons/Icons'
 
 const { TbPlayerPlayFilled } = icons
 
-const flag = false
-
 const Album = () => {
-    const { title, pid } = useParams()
-    const { curSongId, isPlaying, isVipSong, listSong } = useSelector((state) => state.music)
+    const { pid } = useParams()
+    const { isPlaying } = useSelector((state) => state.music)
+    const { isLoading } = useSelector((state) => state.app)
     const dispatch = useDispatch()
     const [playlistData, setPlaylistData] = useState({})
-    const [play, setPlay] = useState(isPlaying)
     const overlayRef = useRef()
 
     useEffect(() => {
         const fetchDetailPlaylist = async () => {
+            dispatch(musicAction.loading(true))
             const res = await musicApi.apiGetDetailPlaylist(pid)
+            dispatch(musicAction.loading(false))
             if (res?.err === 0) {
                 setPlaylistData(res.data)
                 dispatch(musicAction.setPlaylist(res?.data?.song.items))
@@ -33,7 +33,14 @@ const Album = () => {
     }, [pid])
 
     return (
-        <div className="w-full px-[59px] pt-10 mt-[70px] flex flex-col text-white relative">
+        <div className="w-full px-[59px] pt-[10px] mt-[70px] flex flex-col text-white relative">
+            {isLoading && (
+                <div className="absolute top-0 right-0 bottom-0 left-0 bg-[#170f23] z-10">
+                    <div className="w-creen h-screen flex justify-center items-center ">
+                        <Loading />
+                    </div>
+                </div>
+            )}
             <div className="w-full my-[30px] flex gap-7 relative">
                 <div className="flex-auto h-[540px] pb-[30px] sticky top-[110px]">
                     <div className="w-[300px] h-auto rounded-lg shadow-[0_5px_8px_0_rgba(0,0,0,0.2)] overflow-hidden relative">

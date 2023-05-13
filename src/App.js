@@ -15,7 +15,7 @@ function App() {
 
     return (
         <>
-            <div className="w-full min-h-screen flex justify-center bg-[#170f23]">
+            <div className="w-full min-h-screen flex justify-center bg-[#170f23] overflow-y-auto">
                 <Routes>
                     <Route path={routes.PUBLIC} element={<Public />}>
                         <Route path={routes.HOME} element={<Home />} />
