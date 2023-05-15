@@ -5,7 +5,7 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import * as homeAction from './store/actions/homeAction'
 import routes from './utils/routes'
-import { Home, Login, Public, Album } from './pages/public'
+import { Home, Login, Public, Album, WeekChart } from './pages/public'
 
 function App() {
     const dispatch = useDispatch()
@@ -22,6 +22,7 @@ function App() {
                         <Route path={routes.LOGIN} element={<Login />} />
                         <Route path={routes.ALBUM_TITLE_ID} element={<Album />} />
                         <Route path={routes.PLAYLIST_TITLE_ID} element={<Album />} />
+                        <Route path={routes.WEEKCHART_TITLE_ID} element={<WeekChart />} />
                     </Route>
                 </Routes>
             </div>
