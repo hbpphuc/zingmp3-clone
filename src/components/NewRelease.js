@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { compose } from 'redux'
+import { useDispatch, useSelector } from 'react-redux'
+import * as musicAction from '../store/actions'
 import icons from '../assets/icons/Icons'
 import Button from './Button'
 import SongItem from './SongItem'
@@ -9,6 +9,8 @@ const { MdOutlineArrowForwardIos } = icons
 
 const NewRelease = () => {
     const { newRelease } = useSelector((state) => state.app)
+    const dispatch = useDispatch()
+
     const [active, setActive] = useState(0)
     const [homeSongs, setHomeSongs] = useState([])
 
@@ -28,9 +30,30 @@ const NewRelease = () => {
                 </span>
             </div>
             <div className="w-full mb-4 flex">
-                <Button onClick={() => setActive(0)} text={'tất cả'} style={active === 0 && 'btn-active'} />
-                <Button onClick={() => setActive(1)} text={'việt nam'} style={active === 1 && 'btn-active'} />
-                <Button onClick={() => setActive(2)} text={'quốc tế'} style={active === 2 && 'btn-active'} />
+                <Button
+                    onClick={() => {
+                        setActive(0)
+                        dispatch(musicAction.setPlaying(newRelease?.items?.all))
+                    }}
+                    text={'tất cả'}
+                    style={active === 0 && 'btn-active'}
+                />
+                <Button
+                    onClick={() => {
+                        setActive(1)
+                        dispatch(musicAction.setPlaying(newRelease?.items?.others))
+                    }}
+                    text={'việt nam'}
+                    style={active === 1 && 'btn-active'}
+                />
+                <Button
+                    onClick={() => {
+                        setActive(2)
+                        dispatch(musicAction.setPlaying(newRelease?.items?.vPop))
+                    }}
+                    text={'quốc tế'}
+                    style={active === 2 && 'btn-active'}
+                />
             </div>
             <div className="w-full flex justify-between flex-wrap">
                 {homeSongs
