@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useLocation } from 'react-router-dom'
 import moment from 'moment/moment'
 import { useDispatch, useSelector } from 'react-redux'
 import { Audio } from 'react-loader-spinner'
@@ -12,6 +12,7 @@ const { TbPlayerPlayFilled } = icons
 
 const Album = () => {
     const { pid } = useParams()
+    const location = useLocation()
     const { isPlaying } = useSelector((state) => state.music)
     const { isLoading } = useSelector((state) => state.app)
     const dispatch = useDispatch()
@@ -31,6 +32,13 @@ const Album = () => {
 
         fetchDetailPlaylist()
     }, [pid])
+
+    useEffect(() => {
+        if (location.state?.playAlbum) {
+            dispatch(musicAction.setCurSongId(playlistData?.song?.items[0]?.encodeId))
+            dispatch(musicAction.setPlaying(true))
+        }
+    }, [pid, playlistData])
 
     return (
         <div className="w-full px-[59px] pt-[10px] mt-[70px] flex flex-col text-white relative">

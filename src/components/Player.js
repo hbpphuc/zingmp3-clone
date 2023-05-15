@@ -31,7 +31,7 @@ const {
 let intervalId
 
 const Player = () => {
-    const { curSongId, isPlaying, isVipSong, listSong } = useSelector((state) => state.music)
+    const { curSongId, isPlaying, listSong } = useSelector((state) => state.music)
     const dispatch = useDispatch()
     const [songinfo, setSonginfo] = useState(null)
     const [audio, setAudio] = useState(new Audio())

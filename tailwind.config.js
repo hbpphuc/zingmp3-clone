@@ -41,10 +41,32 @@ module.exports = {
                         transform: 'rotate(0deg)',
                     },
                 },
+                'scale-image': {
+                    '0%': {
+                        '-webkit-transform': 'scale(1)',
+                        transform: 'scale(1)',
+                    },
+                    '100%': {
+                        '-webkit-transform': 'scale(1.1)',
+                        transform: 'scale(1.1)',
+                    },
+                },
+                'unscale-image': {
+                    '0%': {
+                        '-webkit-transform': 'scale(1.1)',
+                        transform: 'scale(1.1)',
+                    },
+                    '100%': {
+                        '-webkit-transform': 'scale(1)',
+                        transform: 'scale(1)',
+                    },
+                },
             },
             animation: {
                 'rotate-center': 'rotate-center 20s linear infinite',
-                'rotate-center-pause': 'rotate-center 5s linear infinite',
+                'rotate-center-pause': 'rotate-center-pause 5s linear 1 both',
+                'scale-image': 'scale-image 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both',
+                'unscale-image': 'unscale-image 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both',
             },
         },
     },
