@@ -99,7 +99,7 @@ const HZingChart = () => {
                         ))}
                         <Button
                             text={'Xem thêm'}
-                            style="py-[0.5rem] mt-[5px] mr-0 border border-white hover:bg-[#ffffff1a]"
+                            style={'py-[0.5rem] mt-[5px] mr-0 border border-white hover:bg-[#ffffff1a]'}
                         />
                     </div>
                     <div className="flex-6 h-full ">{data && <Line data={data} options={options} />}</div>

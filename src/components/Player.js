@@ -89,13 +89,12 @@ const Player = () => {
     useEffect(() => {
         const handleEnded = () => {
             audio.pause()
-            console.log('ended', { shuffle })
             if (shuffle) {
                 handleShuffleSong()
             } else if (repeat) {
                 repeat === 1 ? handleRepeatOne() : handleNextSong()
             } else {
-                handleNextSong()
+                audio.pause()
             }
         }
 

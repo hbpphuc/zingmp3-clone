@@ -82,7 +82,7 @@
 }
 
 .btn {
-    @apply mr-[15px] py-1 px-6 rounded-full text-white text-xs font-normal uppercase border border-[#ffffff1a] hover:opacity-90 bg-transparent;
+    @apply py-1 px-6 rounded-full text-white font-normal border border-[#ffffff1a] hover:opacity-90 bg-transparent;
 }
 
 .btn-active {

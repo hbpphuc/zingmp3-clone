@@ -1,6 +1,6 @@
 import React from 'react'
 import icons from '../assets/icons/Icons'
-import { Search } from '../components'
+import { Button, Search } from '../components'
 
 const { VscArrowLeft, VscArrowRight } = icons
 
@@ -20,7 +20,12 @@ const Header = () => {
                     <Search />
                 </div>
             </div>
-            <div>dang nhap</div>
+            <div className="w-[140px] h-[40px] flex justify-center items-center">
+                <Button
+                    text={'Đăng nhập'}
+                    style={'w-full h-full p-0 text-[#feffff] text-sm font-semibold bg-[#9b4de0]'}
+                />
+            </div>
         </div>
     )
 }

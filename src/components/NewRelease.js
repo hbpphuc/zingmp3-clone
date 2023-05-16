@@ -15,6 +15,8 @@ const NewRelease = () => {
     const [active, setActive] = useState(0)
     const [homeSongs, setHomeSongs] = useState([])
 
+    console.log(newRelease)
+
     useEffect(() => {
         if (active === 0) setHomeSongs(newRelease?.items?.all)
         if (active === 1) setHomeSongs(newRelease?.items?.vPop)
@@ -34,26 +36,23 @@ const NewRelease = () => {
                 <Button
                     onClick={() => {
                         setActive(0)
-                        dispatch(musicAction.setPlaying(newRelease?.items?.all))
                     }}
                     text={'tất cả'}
-                    style={active === 0 && 'btn-active'}
+                    style={`${active === 0 && 'btn-active'} mr-[15px] uppercase text-xs`}
                 />
                 <Button
                     onClick={() => {
                         setActive(1)
-                        dispatch(musicAction.setPlaying(newRelease?.items?.others))
                     }}
                     text={'việt nam'}
-                    style={active === 1 && 'btn-active'}
+                    style={`${active === 1 && 'btn-active'} mr-[15px] uppercase text-xs`}
                 />
                 <Button
                     onClick={() => {
                         setActive(2)
-                        dispatch(musicAction.setPlaying(newRelease?.items?.vPop))
                     }}
                     text={'quốc tế'}
-                    style={active === 2 && 'btn-active'}
+                    style={`${active === 2 && 'btn-active'} mr-[15px] uppercase text-xs`}
                 />
             </div>
             <div className="w-full flex justify-between flex-wrap">
