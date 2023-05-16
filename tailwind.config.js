@@ -6,6 +6,7 @@ module.exports = {
         extend: {
             flex: {
                 4: '4 4 0%',
+                6: '6 6 0%',
             },
             colors: {
                 'purple-primary': '#9b4de0',
@@ -13,12 +14,15 @@ module.exports = {
             },
             fontFamily: {
                 inter: ['Inter', ...defaultTheme.fontFamily.sans],
+                roboto: ['Roboto', ...defaultTheme.fontFamily.sans],
             },
             transitionEffect: {
                 'scale-thumb': 'transform .7s',
             },
             backgroundColor: {
                 'active-song': '#ffffff26',
+                'zingchart-text':
+                    'radial-gradient(50% 124.93% at 95.86% -10%,#3efad9 0,hsla(0,0%,100%,0) 100%),linear-gradient(91.56deg,#ff9357 1.54%,#9100ff 98.71%);',
             },
             keyframes: {
                 'rotate-center': {

@@ -4,6 +4,7 @@ import * as musicAction from '../store/actions'
 import icons from '../assets/icons/Icons'
 import Button from './Button'
 import SongItem from './SongItem'
+import { data } from 'autoprefixer'
 
 const { MdOutlineArrowForwardIos } = icons
 
@@ -59,7 +60,9 @@ const NewRelease = () => {
                 {homeSongs
                     ?.filter((item, index) => index < 12)
                     .map((item) => (
-                        <SongItem key={item.encodeId} data={item} />
+                        <div className="w-1/2 min-[1200px]:w-1/3 pr-[14px] ">
+                            <SongItem key={item.encodeId} data={item} releaseDate={item.releaseDate} />
+                        </div>
                     ))}
             </div>
         </div>

@@ -48,8 +48,6 @@ const Player = () => {
     const volumeTrackRef = useRef()
     const volumeThumbRef = useRef()
 
-    // console.log(typeof volumeRef.current.getAttribute('aria-valuenow'))
-
     useEffect(() => {
         const fetchInfoSong = async () => {
             setLoading(true)
@@ -332,7 +330,7 @@ const Player = () => {
                             <div
                                 ref={volumeThumbRef}
                                 className={`thumb absolute top-0 bottom-0 left-0 
-                                ${volume === 0 && 'right-full'} bg-[#ffffff] rounded`}
+                                ${volume === 1 && 'right-0'} bg-[#ffffff] rounded`}
                             ></div>
                         </div>
                     </div>

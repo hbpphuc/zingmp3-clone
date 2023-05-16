@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useRef } from 'react'
 import { Link } from 'react-router-dom'
 
 const HWeekChart = ({ data }) => {

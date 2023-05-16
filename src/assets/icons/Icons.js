@@ -6,7 +6,7 @@ import { RiHeartLine, RiHeartFill, RiMoreFill } from 'react-icons/ri'
 import { SlVolumeOff, SlVolume2 } from 'react-icons/sl'
 import { FiMusic } from 'react-icons/fi'
 import { BsDot } from 'react-icons/bs'
-import { MdOutlineArrowForwardIos, MdMusicVideo, MdOutlineQueueMusic } from 'react-icons/md'
+import { MdOutlineArrowForwardIos, MdMusicVideo, MdOutlineQueueMusic, MdPlayCircle } from 'react-icons/md'
 import {
     TbArrowsShuffle,
     TbRepeat,
@@ -45,6 +45,7 @@ const icons = {
     FiMusic,
     BsDot,
     MdOutlineArrowForwardIos,
+    MdPlayCircle,
 }
 
 export default icons

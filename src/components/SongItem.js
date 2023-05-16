@@ -4,19 +4,34 @@ import 'moment/locale/vi'
 import { useDispatch } from 'react-redux'
 import * as musicAction from '../store/actions'
 
-const SongItem = ({ data }) => {
+const SongItem = ({ data, releaseDate, order, percent }) => {
     const dispatch = useDispatch()
 
     return (
         <div
-            onClick={() => {
+            onDoubleClick={() => {
                 dispatch(musicAction.setCurSongId(data.encodeId))
                 dispatch(musicAction.setPlaying(true))
             }}
-            className="w-1/2 min-[1200px]:w-1/3 pr-[14px] "
+            className="w-full flex justify-between items-center p-[10px] rounded hover:bg-[#ffffff1a] relative"
         >
-            <div className="w-full flex p-[10px] rounded hover:bg-[#ffffff1a]">
-                <div className="w-[60px] h-[60px] mr-[10px] rounded cursor-pointer aspect-square">
+            <div className="flex items-center">
+                {order && (
+                    <div
+                        className={`zingchart-order ${
+                            order === 1 ? 'zc-order-1' : order === 2 ? 'zc-order-2' : order === 3 ? 'zc-order-3' : ''
+                        }`}
+                    >
+                        {order}
+                    </div>
+                )}
+                <div
+                    onClick={() => {
+                        dispatch(musicAction.setCurSongId(data.encodeId))
+                        dispatch(musicAction.setPlaying(true))
+                    }}
+                    className="w-[60px] h-[60px] mr-[10px] rounded cursor-pointer aspect-square"
+                >
                     <img src={data.thumbnail} alt={data.title} className="rounded object-cover aspect-square" />
                 </div>
                 <div className="flex flex-col justify-around cursor-default">
@@ -26,13 +41,16 @@ const SongItem = ({ data }) => {
                     <div className="w-full mt-[3px] text-xs font-normal text-[#ffffff80] leading-[1.33]">
                         {data.artistsNames}
                     </div>
-                    <div className="w-full mt-[3px] text-xs font-normal text-[#ffffff80] leading-[1.33]">
-                        {moment(data.releaseDate * 1000).fromNow() === 'một ngày trước'
-                            ? 'Hôm qua'
-                            : moment(data.releaseDate * 1000).fromNow()}
-                    </div>
+                    {releaseDate && (
+                        <div className="w-full mt-[3px] text-xs font-normal text-[#ffffff80] leading-[1.33]">
+                            {moment(releaseDate * 1000).fromNow() === 'một ngày trước'
+                                ? 'Hôm qua'
+                                : moment(releaseDate * 1000).fromNow()}
+                        </div>
+                    )}
                 </div>
             </div>
+            {percent && <div className="mr-[5px] text-base font-bold cursor-default">{percent}</div>}
         </div>
     )
 }

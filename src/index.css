@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
 @tailwind base;
 @layer base {
     :root {
@@ -81,11 +82,89 @@
 }
 
 .btn {
-    @apply mr-[15px] py-1 px-6 rounded-full text-xs font-normal uppercase border border-[#ffffff1a] hover:opacity-90 bg-transparent;
+    @apply mr-[15px] py-1 px-6 rounded-full text-white text-xs font-normal uppercase border border-[#ffffff1a] hover:opacity-90 bg-transparent;
 }
 
 .btn-active {
     @apply border-[#9b4de0] hover:opacity-90 bg-[#9b4de0] text-white;
+}
+
+.zingchart-text {
+    background: radial-gradient(50% 124.93% at 95.86% -10%, #3efad9 0, hsla(0, 0%, 100%, 0) 100%),
+        linear-gradient(91.56deg, #ff9357 1.54%, #9100ff 98.71%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.zingchart-top-alpha::before {
+    content: "";
+    position: absolute;
+    left: -20px;
+    top: -50px;
+    width: 230px;
+    height: 143.18px;
+    -webkit-filter: blur(150px);
+    filter: blur(150px);
+    border-radius: 115px;
+    transform: rotate(30deg);
+    background: #ba53f5;
+}
+
+.zingchart-top-alpha::after {
+    content: "";
+    position: absolute;
+    left: 152px;
+    bottom: -30px;
+    opacity: 0.7;
+    width: 230px;
+    height: 143.18px;
+    -webkit-filter: blur(150px);
+    filter: blur(150px);
+    border-radius: 115px;
+    transform: rotate(30deg);
+    background: #ba53f5;
+}
+
+.zingchart-bottom-alpha::after {
+    content: "";
+    position: absolute;
+    left: 60%;
+    right: 0;
+    top: -100px;
+    height: 250px;
+    background: #ba53f5;
+    -webkit-filter: blur(230px);
+    filter: blur(230px);
+}
+
+.zingchart-order {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 15px 0 5px;
+    -webkit-text-stroke: 1.5px #fff;
+    opacity: 0.7;
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 1;
+    text-align: center;
+    color: rgba(74, 144, 226, 0);
+    font-family: "Roboto", sans-serif;
+    white-space: nowrap;
+}
+
+.zc-order-1 {
+    -webkit-text-stroke: 1px #4a90e2;
+    opacity: 1;
+}
+.zc-order-2 {
+    -webkit-text-stroke: 1px #50e3c2;
+    opacity: 1;
+}
+.zc-order-3 {
+    -webkit-text-stroke: 1px #e35050;
+    opacity: 1;
 }
 
 @tailwind utilities;

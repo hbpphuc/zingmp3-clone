@@ -8,6 +8,8 @@ const initState = {
     hArtistTheme: {},
     h100: {},
     hAlbum: {},
+    hZCRank: [],
+    hZChart: {},
     weekChart: [],
     isLoading: false,
 }
@@ -22,6 +24,8 @@ const appReducer = (state = initState, action) => {
                 hEditorTheme: action.homeData?.find((item) => item.sectionId === 'hEditorTheme') || {},
                 hEditorTheme2: action.homeData?.find((item) => item.sectionId === 'hEditorTheme2') || {},
                 hArtistTheme: action.homeData?.find((item) => item.sectionId === 'hArtistTheme') || {},
+                hZCRank: action.homeData?.find((item) => item.sectionId === 'hZC')?.items || [],
+                hZChart: action.homeData?.find((item) => item.sectionId === 'hZC')?.chart || {},
                 weekChart: action.homeData?.find((item) => item.sectionType === 'weekChart')?.items || [],
                 h100: action.homeData?.find((item) => item.sectionId === 'h100') || {},
                 hAlbum: action.homeData?.find((item) => item.sectionId === 'hAlbum') || {},
