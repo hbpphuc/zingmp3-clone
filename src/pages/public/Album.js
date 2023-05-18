@@ -41,7 +41,7 @@ const Album = () => {
     }, [pid, playlistData])
 
     return (
-        <div className="w-full px-[59px] pt-[10px] mt-[70px] flex flex-col text-white relative">
+        <div className="w-full flex flex-col text-white relative">
             {isLoading && (
                 <div className="absolute top-0 right-0 bottom-0 left-0 bg-[#170f23] z-10">
                     <div className="w-creen h-screen flex justify-center items-center ">
@@ -49,9 +49,9 @@ const Album = () => {
                     </div>
                 </div>
             )}
-            <div className="w-full my-[30px] flex gap-7 relative">
-                <div className="flex-auto h-[540px] pb-[30px] sticky top-[110px]">
-                    <div className="w-[300px] h-auto rounded-lg shadow-[0_5px_8px_0_rgba(0,0,0,0.2)] overflow-hidden relative">
+            <div className="w-full my-[30px] flex flex-col min-[1200px]:flex-row justify-start items-start gap-7 relative">
+                <div className="flex-1 h-[540px] pb-[30px] flex min-[1200px]:flex-col min-[1200px]:sticky top-[110px]">
+                    <div className="w-[300px] h-auto mr-5 min-[1200px]:mr-0 rounded-lg shadow-[0_5px_8px_0_rgba(0,0,0,0.2)] overflow-hidden relative">
                         <img
                             src={playlistData.thumbnailM}
                             alt={playlistData.title}
@@ -88,7 +88,7 @@ const Album = () => {
                             )}
                         </div>
                     </div>
-                    <div className="w-full mt-3 flex flex-col items-center">
+                    <div className="flex-1 mt-3 flex flex-col items-center">
                         <div className="flex flex-col items-center">
                             <h3 className="text-xl font-bold">{playlistData.title}</h3>
                             <div className="flex flex-col items-center">
@@ -105,7 +105,7 @@ const Album = () => {
                         </div>
                     </div>
                 </div>
-                <div className="w-[calc(100%_-_140px)]">
+                <div className="w-full min-[1200px]:w-[75%]">
                     <div className="mb-[10px]">
                         <span className="text-sm text-[#ffffff80]">Lời tựa </span>
                         <span className="text-sm text-white">{playlistData.sortDescription}</span>

@@ -15,8 +15,6 @@ const NewRelease = () => {
     const [active, setActive] = useState(0)
     const [homeSongs, setHomeSongs] = useState([])
 
-    console.log(newRelease)
-
     useEffect(() => {
         if (active === 0) setHomeSongs(newRelease?.items?.all)
         if (active === 1) setHomeSongs(newRelease?.items?.vPop)
@@ -57,10 +55,10 @@ const NewRelease = () => {
             </div>
             <div className="w-full flex justify-between flex-wrap">
                 {homeSongs
-                    ?.filter((item, index) => index < 12)
+                    ?.filter((i, index) => index < 12)
                     .map((item) => (
-                        <div className="w-1/2 min-[1200px]:w-1/3 pr-[14px] ">
-                            <SongItem key={item.encodeId} data={item} releaseDate={item.releaseDate} />
+                        <div key={item.encodeId} className="w-1/2 min-[1200px]:w-1/3 pr-[14px] ">
+                            <SongItem data={item} releaseDate={item.releaseDate} />
                         </div>
                     ))}
             </div>

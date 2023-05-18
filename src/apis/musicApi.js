@@ -38,3 +38,16 @@ export const apiGetDetailPlaylist = async (playlistId) => {
         console.log(error)
     }
 }
+
+export const apiSearch = async (keyword) => {
+    try {
+        const res = await httpRequest.get('search', {
+            params: {
+                keyword,
+            },
+        })
+        return res
+    } catch (error) {
+        console.log(error)
+    }
+}

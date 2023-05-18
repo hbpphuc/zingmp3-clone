@@ -26,7 +26,7 @@ const HPlaylistItem = ({ data }) => {
     }
 
     return (
-        <div className="w-1/4 min-[1200px]:w-1/5">
+        <div className="w-1/5">
             <div
                 onClick={() => handleGetPath(data)}
                 onMouseEnter={handleImageEnter}

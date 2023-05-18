@@ -6,12 +6,12 @@ const Home = () => {
     const { hEditorTheme, hEditorTheme2, hArtistTheme, weekChart, h100, hAlbum } = useSelector((state) => state.app)
 
     return (
-        <div className="h-[1000px] mt-[70px] px-[59px]">
+        <div>
             <Slider />
             <NewRelease />
             <HPlaylist data={hEditorTheme} />
             <HPlaylist data={hEditorTheme2} />
-            <HPlaylist data={hArtistTheme} />1
+            <HPlaylist data={hArtistTheme} />
             <HZingChart />
             <HWeekChart data={weekChart} />
             <HPlaylist data={h100} />

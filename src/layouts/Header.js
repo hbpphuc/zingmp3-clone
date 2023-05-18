@@ -1,6 +1,6 @@
 import React from 'react'
 import icons from '../assets/icons/Icons'
-import { Button, Search } from '../components'
+import { Button, SearchBar } from '../components'
 
 const { VscArrowLeft, VscArrowRight } = icons
 
@@ -17,7 +17,7 @@ const Header = () => {
                     </button>
                 </div>
                 <div className="w-full max-w-[440px] flex justify-center items-center rounded-full">
-                    <Search />
+                    <SearchBar />
                 </div>
             </div>
             <div className="w-[140px] h-[40px] flex justify-center items-center">

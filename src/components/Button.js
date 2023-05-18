@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
 import { Link } from 'react-router-dom'
 
-const Button = ({ text, style = '', active, to, href, onClick, ...passProps }) => {
+const Button = ({ text, style = '', active, to, href, onClick, leftIcon, rightIcon, ...passProps }) => {
     let Compnt = 'button'
     const props = {
         onClick,
@@ -17,7 +17,9 @@ const Button = ({ text, style = '', active, to, href, onClick, ...passProps }) =
     }
     return (
         <Compnt className={`btn ${style}`} {...props}>
-            {text}
+            {leftIcon && <span className="icon">{leftIcon}</span>}
+            <span className="title">{text}</span>
+            {rightIcon && <span className="icon">{rightIcon}</span>}
         </Compnt>
     )
 }

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Chart } from 'chart.js/auto'
 import { Line } from 'react-chartjs-2'
 import { useSelector } from 'react-redux'
+import routes from '../utils/routes'
 import icons from '../assets/icons/Icons'
 import SongItem from './SongItem'
 import Button from './Button'
@@ -23,7 +24,7 @@ const HZingChart = () => {
                     autoSkip: true,
                     maxTicksLimit: 5,
                 },
-                grid: { color: '#65457b', drawTicks: false },
+                grid: { color: 'gray', drawTicks: false },
                 border: { dash: [2, 4] },
                 min: hZChart?.minScore,
                 max: hZChart?.maxScore,
@@ -54,19 +55,17 @@ const HZingChart = () => {
                     borderColor: i === 0 ? '#4a90e2' : i === 1 ? '#50e3c2' : '#e35050',
                     tension: 0.3,
                     borderWidth: 2,
-                    pointHoverRadius: 5,
+                    pointHoverRadius: 6,
                     pointBackgroundColor: 'white',
-                    pointHitRadius: 5,
+                    pointHitRadius: 6,
                     pointBorderColor: i === 0 ? '#4a90e2' : i === 1 ? '#50e3c2' : '#e35050',
                     animation: false,
-                    pointHoverBorderWidth: 5,
+                    pointHoverBorderWidth: 4,
                 })
             }
             setData({ labels, datasets })
         }
     }, [hZChart])
-
-    console.log({ hZCRank })
 
     return (
         <div className="w-full h-[413px] mt-[48px] rounded-lg overflow-hidden relative bg-[#2b273f]">
@@ -76,7 +75,7 @@ const HZingChart = () => {
             </div>
             <div className="absolute top-0 right-0 bottom-0 left-0 p-5 flex flex-col">
                 <div className="mb-5 flex items-center gap-2 text-[28px] font-bold leading-normal text-white">
-                    <Link to="" className="zingchart-text">
+                    <Link to={routes.ZING_CHART} className="zingchart-text">
                         #zingchart
                     </Link>
                     <span className="cursor-pointer hover:opacity-90">
@@ -99,6 +98,7 @@ const HZingChart = () => {
                         ))}
                         <Button
                             text={'Xem thêm'}
+                            to={routes.ZING_CHART}
                             style={'py-[0.5rem] mt-[5px] mr-0 border border-white hover:bg-[#ffffff1a]'}
                         />
                     </div>

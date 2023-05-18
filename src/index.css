@@ -81,8 +81,26 @@
     margin: 0 10px !important;
 }
 
+.is-collapse {
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+    background-color: #34224f;
+    border: 1px solid transparent;
+}
+
+.icon + .title,
+.title + .icon {
+    margin-left: 4px;
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
 .btn {
-    @apply py-1 px-6 rounded-full text-white font-normal border border-[#ffffff1a] hover:opacity-90 bg-transparent;
+    @apply flex justify-center items-center py-1 px-6 rounded-full text-white font-normal border border-[#ffffff1a] hover:opacity-90 bg-transparent;
 }
 
 .btn-active {

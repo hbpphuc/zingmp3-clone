@@ -5,6 +5,7 @@ const initState = {
     isPlaying: false,
     isVipSong: false,
     listSong: [],
+    searchData: {},
 }
 
 const musicReducer = (state = initState, action) => {
@@ -14,20 +15,29 @@ const musicReducer = (state = initState, action) => {
                 ...state,
                 curSongId: action.songId || null,
             }
+
         case actionTypes.PLAY:
             return {
                 ...state,
                 isPlaying: action.flag,
             }
+
         case actionTypes.VIPSONG:
             return {
                 ...state,
                 isVipSong: action.flag,
             }
+
         case actionTypes.PLAYLIST:
             return {
                 ...state,
                 listSong: action.listSong || null,
+            }
+
+        case actionTypes.SEARCH:
+            return {
+                ...state,
+                searchData: action.data || {},
             }
 
         default:

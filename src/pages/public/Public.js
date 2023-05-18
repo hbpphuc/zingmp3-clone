@@ -10,10 +10,10 @@ const Public = () => {
                 <div className="w-[240px] h-full bg-[#ffffff0d] fixed">
                     <Sidebar />
                 </div>
-                <div className="w-[calc(100%_-_240px)] h-[70px] absolute right-0">
-                    <div className="min-w-[660px] h-[70px] px-[59px] flex items-center fixed left-[240px] top-0 right-0 text-white backdrop-blur-[50px] bg-[#170f23cc] shadow-[0_3px_5px_rgba(0,0,0,0.1)] z-50">
-                        <Header />
-                    </div>
+                <div className="min-w-[660px] h-[70px] px-[59px] flex items-center fixed left-[240px] top-0 right-0 text-white backdrop-blur-[50px] bg-[#170f23cc] shadow-[0_3px_5px_rgba(0,0,0,0.1)] z-50">
+                    <Header />
+                </div>
+                <div className="w-[calc(100%_-_240px)] mt-[70px] text-white px-[59px] absolute right-0">
                     <Outlet />
                 </div>
             </div>
