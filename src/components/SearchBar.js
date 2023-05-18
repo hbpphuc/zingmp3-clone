@@ -3,6 +3,7 @@ import { useNavigate, createSearchParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useDebounce } from 'use-debounce'
 import Headless from '@tippyjs/react/headless'
+import _ from 'lodash'
 import icons from '../assets/icons/Icons'
 import * as musicApi from '../apis/musicApi'
 import * as musicAction from '../store/actions'
@@ -21,25 +22,29 @@ const SearchBar = () => {
     const { searchData } = useSelector((state) => state.music)
     const navigate = useNavigate()
 
-    const [debouncedValue] = useDebounce(keyword, 700)
+    // const [debouncedValue] = useDebounce(keyword, 700)
     // useEffect(() => {
     //     dispatch(musicAction.search(debouncedValue))
     // }, [debouncedValue])
 
     const handleEnterSearch = async (e) => {
         if (e.keyCode === 13) {
-            dispatch(musicAction.search(debouncedValue))
-            if (searchData) {
-                navigate({
-                    pathname: `${routes.SEARCH}/${routes.ALL}`,
-                    search: createSearchParams({
-                        q: keyword,
-                    }).toString(),
-                })
-                setIsFocus(false)
-                searchInputRef.current.blur()
+            if (keyword === '' || keyword.startsWith(' ')) {
+                e.preventDefault()
             } else {
-                alert('không có dữ liệu')
+                dispatch(musicAction.search(keyword))
+                if (!_.isEmpty(searchData)) {
+                    navigate({
+                        pathname: `${routes.SEARCH}/${routes.ALL}`,
+                        search: createSearchParams({
+                            q: keyword,
+                        }).toString(),
+                    })
+                    setIsFocus(false)
+                    searchInputRef.current.blur()
+                } else {
+                    alert('không có dữ liệu')
+                }
             }
         }
     }

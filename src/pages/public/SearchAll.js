@@ -10,8 +10,6 @@ const { MdOutlineArrowForwardIos } = icons
 const SearchAll = () => {
     const { searchData } = useSelector((state) => state.music)
 
-    console.log(searchData)
-
     return (
         <div className="w-full h-[400px] flex flex-col">
             <div className="w-full flex flex-col justify-start items-start">
@@ -135,11 +133,13 @@ const SearchAll = () => {
                 </h3>
                 <div className="w-full flex">
                     {searchData?.artists?.length > 0 &&
-                        searchData?.artists.map((item) => (
-                            <div className="w-[20%] artist">
-                                <Artist key={item.encodeId} data={item} />
-                            </div>
-                        ))}
+                        searchData?.artists
+                            .filter((i, index) => index <= 4)
+                            .map((item) => (
+                                <div key={item.encodeId} className="w-[20%] artist">
+                                    <Artist data={item} />
+                                </div>
+                            ))}
                 </div>
             </div>
         </div>
