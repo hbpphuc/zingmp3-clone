@@ -39,6 +39,21 @@ export const apiGetDetailPlaylist = async (playlistId) => {
     }
 }
 
+export const apiGetArtistSong = async (singerId) => {
+    try {
+        const res = await httpRequest.get('artistsong', {
+            params: {
+                id: singerId,
+                page: 1,
+                count: 100,
+            },
+        })
+        return res
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 export const apiSearch = async (keyword) => {
     try {
         const res = await httpRequest.get('search', {

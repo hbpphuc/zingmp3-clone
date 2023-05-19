@@ -7,6 +7,7 @@ const actionTypes = {
     PLAY: 'PLAY',
     VIPSONG: 'VIPSONG',
     PLAYLIST: 'PLAYLIST',
+    ARTISTLSONG: 'ARTISTLSONG',
 
     // search
     SEARCH: 'SEARCH',

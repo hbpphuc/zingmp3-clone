@@ -20,17 +20,35 @@ export const search = (keyword) => async (dispatch) => {
                 dispatch({
                     type: actionTypes.SEARCH,
                     data: res.data,
+                    q: keyword,
                 })
             } else {
                 dispatch({
                     type: actionTypes.SEARCH,
                     data: null,
+                    q: keyword,
                 })
             }
         } else {
-            dispatch({ type: actionTypes.SEARCH, data: null })
+            dispatch({ type: actionTypes.SEARCH, data: null, q: keyword })
         }
     } catch (error) {
-        dispatch({ type: actionTypes.SEARCH, data: null })
+        dispatch({ type: actionTypes.SEARCH, data: null, q: keyword })
+    }
+}
+
+export const getArtistSong = (singerId) => async (dispatch) => {
+    try {
+        const res = await musicApi.apiGetArtistSong(singerId)
+        if (res?.err === 0) {
+            dispatch({
+                type: actionTypes.ARTISTLSONG,
+                artistsong: res.data,
+            })
+        } else {
+            dispatch({ type: actionTypes.ARTISTLSONG, artistsong: null })
+        }
+    } catch (error) {
+        dispatch({ type: actionTypes.ARTISTLSONG, artistsong: null })
     }
 }
