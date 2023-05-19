@@ -8,8 +8,9 @@ const routes = {
     WEEKCHART_TITLE_ID: 'zing-chart-tuan/:title/:pid',
     ZING_CHART: 'zing-chart',
     SEARCH: 'tim-kiem',
-    ALL: 'tat-ca',
-    SONG: 'bai-hat',
+    SEARCH_ALL: 'tat-ca',
+    SEARCH_SONG: 'bai-hat',
+    SINGER: ':singer',
 }
 
 export default routes

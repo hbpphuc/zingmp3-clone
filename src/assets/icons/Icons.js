@@ -8,6 +8,7 @@ import { FiMusic } from 'react-icons/fi'
 import { BsDot } from 'react-icons/bs'
 import { MdOutlineArrowForwardIos, MdMusicVideo, MdOutlineQueueMusic, MdPlayCircle } from 'react-icons/md'
 import { AiOutlineUserAdd } from 'react-icons/ai'
+import { CgClose } from 'react-icons/cg'
 import {
     TbArrowsShuffle,
     TbRepeat,
@@ -48,6 +49,7 @@ const icons = {
     MdOutlineArrowForwardIos,
     MdPlayCircle,
     AiOutlineUserAdd,
+    CgClose,
 }
 
 export default icons

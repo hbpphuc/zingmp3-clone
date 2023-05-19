@@ -34,14 +34,14 @@ const AlbumSongItem = ({ songData, isAlbum }) => {
                             {songData.title}
                         </p>
                         <div className="max-w-full mt-[1px] flex justify-start items-center text-xs text-[#ffffff80]">
-                            <span className="hover:purple-hover">{songData.artistsNames}</span>
+                            <span className="hover:text-purple-hover">{songData.artistsNames}</span>
                         </div>
                     </div>
                 </div>
             </div>
             {!isAlbum && (
                 <div className="w-[35%] flex justify-start items-center">
-                    <span className="w-full font-normal whitespace-nowrap text-ellipsis overflow-hidden">
+                    <span className="w-full font-normal whitespace-nowrap text-sm text-ellipsis text-[#ffffff80] overflow-hidden">
                         {songData?.album?.title}
                     </span>
                 </div>

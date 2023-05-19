@@ -9,7 +9,7 @@ import * as musicApi from '../apis/musicApi'
 import * as musicAction from '../store/actions'
 import routes from '../utils/routes'
 
-const { TfiSearch } = icons
+const { TfiSearch, CgClose } = icons
 
 const SearchBar = () => {
     const [keyword, setKeyword] = useState('')
@@ -35,7 +35,7 @@ const SearchBar = () => {
                 dispatch(musicAction.search(keyword))
                 if (!_.isEmpty(searchData)) {
                     navigate({
-                        pathname: `${routes.SEARCH}/${routes.ALL}`,
+                        pathname: `${routes.SEARCH}/${routes.SEARCH_ALL}`,
                         search: createSearchParams({
                             q: keyword,
                         }).toString(),
@@ -43,7 +43,7 @@ const SearchBar = () => {
                     setIsFocus(false)
                     searchInputRef.current.blur()
                 } else {
-                    alert('không có dữ liệu')
+                    alert('Chưa load xong dữ liệu hoặc không có dữ liệu')
                 }
             }
         }
@@ -89,6 +89,18 @@ const SearchBar = () => {
                         onFocus={() => setIsFocus(true)}
                         onKeyUp={handleEnterSearch}
                     />
+                    {keyword && (
+                        <span
+                            onClick={() => {
+                                setKeyword('')
+                                setIsFocus(true)
+                                searchInputRef.current.focus()
+                            }}
+                            className="text-[#c5c5c5] cursor-pointer"
+                        >
+                            <CgClose />
+                        </span>
+                    )}
                 </div>
             </Headless>
         </div>

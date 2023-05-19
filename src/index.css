@@ -185,4 +185,13 @@
     opacity: 1;
 }
 
+.search-filter::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    top: 170%;
+    border-bottom: 2px solid #9b4de0;
+}
+
 @tailwind utilities;

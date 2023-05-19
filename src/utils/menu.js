@@ -19,3 +19,26 @@ export const sidebarMenu = [
         icon: <MdOutlineLibraryMusic size={24} />,
     },
 ]
+
+export const searchMenu = [
+    {
+        path: 'tat-ca',
+        text: 'tất cả',
+    },
+    {
+        path: 'bai-hat',
+        text: 'bài hát',
+    },
+    {
+        path: 'playlist',
+        text: 'playlist/album',
+    },
+    {
+        path: 'artist',
+        text: 'nghệ sĩ/oa',
+    },
+    {
+        path: 'video',
+        text: 'mv',
+    },
+]
