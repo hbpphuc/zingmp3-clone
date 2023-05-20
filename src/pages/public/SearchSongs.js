@@ -18,7 +18,7 @@ const SearchSongs = () => {
             <div className="w-full flex justify-between items-center flex-wrap">
                 {artistSong?.items?.map((item, index) => (
                     <div className={`w-full`} key={index}>
-                        <AlbumSongItem songData={item} />
+                        <AlbumSongItem songData={item} isHideNoteIcon />
                     </div>
                 ))}
             </div>

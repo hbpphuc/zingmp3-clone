@@ -1,18 +1,26 @@
 import React from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
 import icons from '../assets/icons/Icons'
 import { Button, SearchBar } from '../components'
 
 const { VscArrowLeft, VscArrowRight } = icons
 
 const Header = () => {
+    const { singer } = useParams()
+    const navigate = useNavigate()
+
     return (
-        <div className="w-full h-[40px] flex justify-between items-center gap-[10px]">
+        <div className={`w-full h-[70px] flex justify-between items-center gap-[10px] z-50`}>
             <div className="w-full h-[40px] flex grow">
                 <div className="flex items-center gap-5">
-                    <button className="w-6 h-6 flex items-center disabled:opacity-30" disabled>
+                    <button
+                        onClick={() => navigate(-1)}
+                        className="w-6 h-6 flex items-center disabled:opacity-30"
+                        // disabled
+                    >
                         <VscArrowLeft size={24} />
                     </button>
-                    <button className="w-6 h-6 flex items-center mr-5 ">
+                    <button onClick={() => navigate(1)} className="w-6 h-6 flex items-center mr-5 ">
                         <VscArrowRight size={24} />
                     </button>
                 </div>

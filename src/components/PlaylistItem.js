@@ -5,7 +5,7 @@ import icons from '../assets/icons/Icons'
 
 const { RiHeartLine, RiHeartFill, RiMoreFill, TbPlayerPlayFilled } = icons
 
-const HPlaylistItem = ({ data }) => {
+const PlaylistItem = ({ data }) => {
     const navigate = useNavigate()
     const [isHover, setIsHover] = useState(false)
     const imageRef = useRef()
@@ -80,4 +80,4 @@ const HPlaylistItem = ({ data }) => {
     )
 }
 
-export default memo(HPlaylistItem)
+export default memo(PlaylistItem)

@@ -81,6 +81,10 @@
     margin: 0 10px !important;
 }
 
+.main-header {
+    @apply min-w-[660px] h-[70px] px-[59px] flex items-center fixed left-[240px] top-0 right-0 text-white z-50;
+}
+
 .is-collapse {
     border-radius: 20px 20px 0 0;
     box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2);
@@ -192,6 +196,20 @@
     width: 100%;
     top: 170%;
     border-bottom: 2px solid #9b4de0;
+}
+
+.btn-bg-scale {
+    background-color: #9b4de0;
+    border: 1px solid #9b4de0;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: transform 0.3s;
+    opacity: 0;
+}
+
+.btn-was-hover:hover + .btn-bg-scale {
+    transform: scale(1);
+    opacity: 1;
 }
 
 @tailwind utilities;

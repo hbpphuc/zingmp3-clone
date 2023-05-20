@@ -6,7 +6,7 @@ import * as musicAction from '../store/actions/'
 
 const { FiMusic } = icons
 
-const AlbumSongItem = ({ songData, isAlbum }) => {
+const AlbumSongItem = ({ songData, isHideNoteIcon, isHideAlbumTitle }) => {
     const { curSongId } = useSelector((state) => state.music)
     const dispatch = useDispatch()
     return (
@@ -20,7 +20,7 @@ const AlbumSongItem = ({ songData, isAlbum }) => {
             } border-b border-[#ffffff0d] cursor-pointer`}
         >
             <div className="flex-auto flex justify-start items-center">
-                {!isAlbum && (
+                {!isHideNoteIcon && (
                     <span className="w-[14px] mr-[10px] flex items-center text-[#ffffff80]">
                         <FiMusic size={14} />
                     </span>
@@ -39,7 +39,7 @@ const AlbumSongItem = ({ songData, isAlbum }) => {
                     </div>
                 </div>
             </div>
-            {!isAlbum && (
+            {!isHideAlbumTitle && (
                 <div className="w-[35%] flex justify-start items-center">
                     <span className="w-full font-normal whitespace-nowrap text-sm text-ellipsis text-[#ffffff80] overflow-hidden">
                         {songData?.album?.title}

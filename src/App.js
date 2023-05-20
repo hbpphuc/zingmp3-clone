@@ -28,6 +28,7 @@ function App() {
                             <Route path={routes.SEARCH_SONG} element={<SearchSongs />} />
                         </Route>
                         <Route path={routes.SINGER} element={<Singer />} />
+                        <Route path={routes.ARTIST_SINGER} element={<Singer />} />
                     </Route>
                 </Routes>
             </div>

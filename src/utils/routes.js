@@ -11,6 +11,7 @@ const routes = {
     SEARCH_ALL: 'tat-ca',
     SEARCH_SONG: 'bai-hat',
     SINGER: ':singer',
+    ARTIST_SINGER: 'nghe-si/:singer',
 }
 
 export default routes

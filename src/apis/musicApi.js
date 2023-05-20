@@ -66,3 +66,16 @@ export const apiSearch = async (keyword) => {
         console.log(error)
     }
 }
+
+export const apiGetArtist = async (alias) => {
+    try {
+        const res = await httpRequest.get('artist', {
+            params: {
+                name: alias,
+            },
+        })
+        return res
+    } catch (error) {
+        console.log(error)
+    }
+}

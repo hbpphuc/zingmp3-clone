@@ -1,10 +1,10 @@
 import React, { memo } from 'react'
 import icons from '../assets/icons/Icons'
-import HPlaylistItem from './HPlaylistItem'
+import PlaylistItem from './PlaylistItem'
 
 const { MdOutlineArrowForwardIos } = icons
 
-const HPlaylist = ({ data }) => {
+const Playlist = ({ data }) => {
     return (
         <div className="w-full text-white mt-12">
             <div className="w-full mb-5 flex justify-between items-center">
@@ -18,10 +18,10 @@ const HPlaylist = ({ data }) => {
             </div>
             <div className="w-full flex gap-7">
                 {data?.items?.length > 0 &&
-                    data?.items?.slice(0, 5).map((item) => <HPlaylistItem key={item.encodeId} data={item} />)}
+                    data?.items?.slice(0, 5).map((item) => <PlaylistItem key={item.encodeId} data={item} />)}
             </div>
         </div>
     )
 }
 
-export default memo(HPlaylist)
+export default memo(Playlist)

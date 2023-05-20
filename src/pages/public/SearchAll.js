@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { formatFollow } from '../../utils/helper'
 import { AlbumSongItem, Artist } from '../../components'
 import icons from '../../assets/icons/Icons'
-import HPlaylistItem from '../../components/HPlaylistItem'
+import PlaylistItem from '../../components/PlaylistItem'
+import { Link } from 'react-router-dom'
 
 const { MdOutlineArrowForwardIos } = icons
 
@@ -16,12 +17,19 @@ const SearchAll = () => {
                 <h3 className="flex justify-start items-center mb-5 text-xl font-bold">Nổi Bật</h3>
                 <div className="w-full flex justify-between items-center gap-7">
                     {searchData?.top ? (
-                        <div className="flex-1 flex items-center p-[10px] bg-[#feffff0d] rounded">
+                        <Link
+                            to={searchData?.top?.link}
+                            className={`flex-1 flex items-center p-[10px] bg-[#feffff0d] rounded ${
+                                searchData?.top?.objectType === 'artist' ? 'cursor-pointer' : 'cursor-default'
+                            }`}
+                        >
                             <div className="w-[84px] h-[84px] mr-[10px] flex items-center">
                                 <img
                                     src={searchData?.top?.thumbnail}
                                     alt={searchData?.top?.name}
-                                    className="rounded-full object-cover"
+                                    className={`${
+                                        searchData?.top?.objectType === 'artist' ? 'rounded-full' : 'rounded'
+                                    } object-cover`}
                                 />
                             </div>
                             <div className="flex-1 flex flex-col ml-[6px]">
@@ -43,7 +51,7 @@ const SearchAll = () => {
                                     </span>
                                 )}
                             </div>
-                        </div>
+                        </Link>
                     ) : (
                         <div className="flex-1 flex items-center p-[10px] bg-[#feffff0d] rounded">
                             <div className="w-[84px] h-[84px] mr-[10px] flex items-center">
@@ -67,7 +75,10 @@ const SearchAll = () => {
                         </div>
                     )}
                     {searchData?.songs.slice(0, 2).map((item) => (
-                        <div className="flex-1 flex items-center p-[10px] bg-[#feffff0d] rounded cursor-default">
+                        <div
+                            key={item.encodeId}
+                            className="flex-1 flex items-center p-[10px] bg-[#feffff0d] rounded cursor-default"
+                        >
                             <div className="w-[84px] h-[84px] mr-[10px] flex items-center">
                                 <img src={item.thumbnailM} alt={item.title} className="rounded object-cover" />
                             </div>
@@ -99,9 +110,9 @@ const SearchAll = () => {
                     {searchData?.songs.slice(0, 6).map((item, index) => (
                         <div
                             className={`w-full min-[1200px]:w-1/2 flex ${index % 2 === 0 ? 'pr-3' : 'pl-3'}`}
-                            key={index}
+                            key={item.encodeId}
                         >
-                            <AlbumSongItem songData={item} isAlbum />
+                            <AlbumSongItem songData={item} isHideNoteIcon isHideAlbumTitle />
                         </div>
                     ))}
                 </div>
@@ -119,7 +130,7 @@ const SearchAll = () => {
                     {searchData?.playlists?.length > 0 &&
                         searchData?.playlists
                             ?.slice(0, 5)
-                            .map((item) => <HPlaylistItem key={item.encodeId} data={item} />)}
+                            .map((item) => <PlaylistItem key={item.encodeId} data={item} />)}
                 </div>
             </div>
 

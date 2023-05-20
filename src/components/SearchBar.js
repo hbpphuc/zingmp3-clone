@@ -70,10 +70,10 @@ const SearchBar = () => {
             >
                 <div
                     ref={formSeachRef}
-                    className={`w-full h-10 px-[10px] flex items-center gap-2 ${
+                    className={`w-full h-10 px-[10px] flex items-center gap-2 z-10 ${
                         isFocus
                             ? 'rounded-[20px_20px_0_0] shadow-[0_1px_5px_0_rgba(0, 0, 0, 0.2)] bg-[#34224f] border border-transparent'
-                            : 'bg-[#ffffff1a] rounded-full '
+                            : 'bg-[#ffffff1a] rounded-full'
                     }`}
                 >
                     <button className="w-5 h-full flex items-center outline-none bg-transparent">

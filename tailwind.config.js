@@ -45,6 +45,16 @@ module.exports = {
                         transform: 'rotate(0deg)',
                     },
                 },
+                'scale-up': {
+                    '0%': {
+                        '-webkit-transform': 'scale(0)',
+                        transform: 'scale(0)',
+                    },
+                    '100%': {
+                        '-webkit-transform': 'scale(1)',
+                        transform: 'scale(1)',
+                    },
+                },
                 'scale-image': {
                     '0%': {
                         '-webkit-transform': 'scale(1)',
@@ -69,6 +79,7 @@ module.exports = {
             animation: {
                 'rotate-center': 'rotate-center 20s linear infinite',
                 'rotate-center-pause': 'rotate-center-pause 5s linear 1 both',
+                'scale-up': 'scale-up 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both',
                 'scale-image': 'scale-image 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both',
                 'unscale-image': 'unscale-image 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both',
             },
