@@ -79,3 +79,12 @@ export const apiGetArtist = async (alias) => {
         console.log(error)
     }
 }
+
+export const apiGetTop100 = async () => {
+    try {
+        const res = await httpRequest.get('top100')
+        return res
+    } catch (error) {
+        console.log(error)
+    }
+}

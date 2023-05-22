@@ -4,7 +4,7 @@ import { Chart } from 'chart.js/auto'
 import { Line } from 'react-chartjs-2'
 import { useSelector } from 'react-redux'
 import routes from '../utils/routes'
-import icons from '../assets/icons/Icons'
+import icons from './Icons'
 import SongItem from './SongItem'
 import Button from './Button'
 

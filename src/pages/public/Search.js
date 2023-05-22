@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Outlet, NavLink } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { searchMenu } from '../../utils/menu'

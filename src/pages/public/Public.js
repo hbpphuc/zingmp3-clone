@@ -7,22 +7,30 @@ import { Player } from '../../components'
 const Public = () => {
     const { curSongId } = useSelector((state) => state.music)
     const { singer } = useParams()
-    const [headerTop, setHeaderTop] = useState(true)
+    const [scrollTop, setScrollTop] = useState(true)
     const ref = useRef()
 
     useEffect(() => {
         ref.current.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' })
     }, [])
 
+    const handleScroll = (e) => {
+        if (e.target.scrollTop <= 300) {
+            setScrollTop(true)
+        } else {
+            setScrollTop(false)
+        }
+    }
+
     return (
         <div ref={ref} className="w-full min-h-full flex flex-col overflow-y-auto relative">
-            <div className="flex-auto w-full max-h-full flex overflow-y-auto relative ">
+            <div onScroll={handleScroll} className="flex-auto w-full max-h-full flex overflow-y-auto relative ">
                 <div className="w-[240px] h-full bg-[#ffffff0d] fixed">
                     <Sidebar />
                 </div>
                 <div
                     className={`main-header ${
-                        singer
+                        singer && scrollTop
                             ? 'bg-gradient-to-t from-[#0e131a00] to-[#4e5053]'
                             : 'backdrop-blur-[50px] bg-[#170f23cc] shadow-[0_3px_5px_rgba(0,0,0,0.1)]'
                     }`}

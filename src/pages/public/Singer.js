@@ -2,12 +2,11 @@ import Tippy from '@tippyjs/react'
 import React, { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import * as musicApi from '../../apis/musicApi'
-import icons from '../../assets/icons/Icons'
 import { ZingAward } from '../../assets/images/Images'
-import { AlbumSongItem, Artist, Button } from '../../components'
+import { AlbumSongItem, Artist, Button, Icons } from '../../components'
 import PlaylistItem from '../../components/PlaylistItem'
 
-const { AiOutlineUserAdd, TbPlayerPlayFilled, TbPlayerPauseFilled, MdOutlineArrowForwardIos } = icons
+const { AiOutlineUserAdd, TbPlayerPlayFilled, TbPlayerPauseFilled, MdOutlineArrowForwardIos } = Icons
 
 const Singer = () => {
     const { singer } = useParams()
@@ -25,11 +24,11 @@ const Singer = () => {
     }, [singer])
 
     useEffect(() => {
-        ref.current.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' })
+        ref.current.scrollIntoView()
     }, [])
 
     return (
-        <div ref={ref} className="w-full flex flex-col">
+        <div ref={ref} className="w-full h-auto flex flex-col">
             <div className="w-full h-[360px] mb-[30px]">
                 <div className="flex flex-col absolute left-0 right-0 top-0">
                     <img src={artist?.cover} alt={artist?.alias} className="w-full object-cover" />

@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import icons from '../assets/icons/Icons'
+import icons from './Icons'
 import { formatFollow } from '../utils/helper'
 import Button from './Button'
 

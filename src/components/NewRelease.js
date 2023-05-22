@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import * as musicAction from '../store/actions'
-import icons from '../assets/icons/Icons'
+import icons from './Icons'
 import Button from './Button'
 import SongItem from './SongItem'
 import { data } from 'autoprefixer'

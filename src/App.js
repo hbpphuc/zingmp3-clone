@@ -5,7 +5,18 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import * as homeAction from './store/actions/homeAction'
 import routes from './utils/routes'
-import { Home, Login, Public, Album, WeekChart, Search, SearchAll, Singer, SearchSongs } from './pages/public'
+import {
+    Home,
+    Login,
+    Public,
+    Album,
+    WeekChart,
+    Search,
+    SearchAll,
+    Singer,
+    SearchSongs,
+    ZingChart,
+} from './pages/public'
 
 function App() {
     const dispatch = useDispatch()
@@ -29,6 +40,7 @@ function App() {
                         </Route>
                         <Route path={routes.SINGER} element={<Singer />} />
                         <Route path={routes.ARTIST_SINGER} element={<Singer />} />
+                        <Route path={routes.ZING_CHART} element={<ZingChart />} />
                     </Route>
                 </Routes>
             </div>

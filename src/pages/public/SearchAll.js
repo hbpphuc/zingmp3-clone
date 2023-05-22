@@ -1,12 +1,11 @@
 import React, { useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { formatFollow } from '../../utils/helper'
-import { AlbumSongItem, Artist } from '../../components'
-import icons from '../../assets/icons/Icons'
+import { AlbumSongItem, Artist, Icons } from '../../components'
 import PlaylistItem from '../../components/PlaylistItem'
 import { Link } from 'react-router-dom'
 
-const { MdOutlineArrowForwardIos } = icons
+const { MdOutlineArrowForwardIos } = Icons
 
 const SearchAll = () => {
     const { searchData } = useSelector((state) => state.music)

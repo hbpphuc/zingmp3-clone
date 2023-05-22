@@ -5,10 +5,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Audio } from 'react-loader-spinner'
 import * as musicApi from '../../apis/musicApi'
 import * as musicAction from '../../store/actions'
-import { AlbumSongList, Loading } from '../../components'
-import icons from '../../assets/icons/Icons'
+import { AlbumSongList, Icons, Loading } from '../../components'
 
-const { TbPlayerPlayFilled } = icons
+const { TbPlayerPlayFilled } = Icons
 
 const Album = () => {
     const { pid } = useParams()

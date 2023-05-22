@@ -2,7 +2,7 @@ import React, { memo } from 'react'
 import moment from 'moment'
 import { useSelector } from 'react-redux'
 import AlbumSongItem from './AlbumSongItem'
-import icons from '../assets/icons/Icons'
+import icons from './Icons'
 
 const { BsDot } = icons
 

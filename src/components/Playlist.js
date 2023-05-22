@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import icons from '../assets/icons/Icons'
+import icons from './Icons'
 import PlaylistItem from './PlaylistItem'
 
 const { MdOutlineArrowForwardIos } = icons

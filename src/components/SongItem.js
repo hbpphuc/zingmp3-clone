@@ -18,7 +18,7 @@ const SongItem = ({ data, releaseDate, order, percent }) => {
             <div className="flex items-center">
                 {order && (
                     <div
-                        className={`zingchart-order ${
+                        className={`zingchart-order mr-[15px] ml-[5px] ${
                             order === 1 ? 'zc-order-1' : order === 2 ? 'zc-order-2' : order === 3 ? 'zc-order-3' : ''
                         }`}
                     >

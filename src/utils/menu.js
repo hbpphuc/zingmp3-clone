@@ -1,6 +1,6 @@
-import icons from '../assets/icons/Icons'
+import { Icons } from '../components'
 
-const { MdOutlineLibraryMusic, MdOutlineHomeMax, TbChartDots2 } = icons
+const { MdOutlineLibraryMusic, MdOutlineHomeMax, TbChartDots2 } = Icons
 
 export const sidebarMenu = [
     {

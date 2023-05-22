@@ -7,7 +7,7 @@ import 'tippy.js/dist/tippy.css'
 import moment from 'moment'
 import * as musicApi from '../apis/musicApi'
 import * as musicAction from '../store/actions'
-import icons from '../assets/icons/Icons'
+import icons from './Icons'
 import { RotatingLines } from 'react-loader-spinner'
 
 const {
@@ -28,6 +28,7 @@ const {
     TbMicrophone2,
     MdOutlineQueueMusic,
 } = icons
+
 let intervalId
 
 const Player = () => {

@@ -5,7 +5,7 @@ import { TfiSearch } from 'react-icons/tfi'
 import { RiHeartLine, RiHeartFill, RiMoreFill } from 'react-icons/ri'
 import { SlVolumeOff, SlVolume2 } from 'react-icons/sl'
 import { FiMusic } from 'react-icons/fi'
-import { BsDot } from 'react-icons/bs'
+import { BsDot, BsCaretDownFill, BsCaretUpFill } from 'react-icons/bs'
 import { MdOutlineArrowForwardIos, MdMusicVideo, MdOutlineQueueMusic, MdPlayCircle } from 'react-icons/md'
 import { AiOutlineUserAdd } from 'react-icons/ai'
 import { CgClose } from 'react-icons/cg'
@@ -19,6 +19,7 @@ import {
     TbPlayerSkipForwardFilled,
     TbPictureInPicture,
     TbMicrophone2,
+    TbMinus,
 } from 'react-icons/tb'
 
 const icons = {
@@ -50,6 +51,9 @@ const icons = {
     MdPlayCircle,
     AiOutlineUserAdd,
     CgClose,
+    BsCaretDownFill,
+    BsCaretUpFill,
+    TbMinus,
 }
 
 export default icons

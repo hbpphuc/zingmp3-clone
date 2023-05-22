@@ -1,7 +1,7 @@
 import React, { useState, useRef, memo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Tippy from '@tippyjs/react'
-import icons from '../assets/icons/Icons'
+import icons from './Icons'
 
 const { RiHeartLine, RiHeartFill, RiMoreFill, TbPlayerPlayFilled } = icons
 

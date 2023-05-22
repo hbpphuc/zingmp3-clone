@@ -1,26 +1,33 @@
-import React from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
-import icons from '../assets/icons/Icons'
-import { Button, SearchBar } from '../components'
+import React, { useEffect, useRef, useState } from 'react'
+import { useParams, useNavigate, useLocation } from 'react-router-dom'
+import { Button, Icons, SearchBar } from '../components'
 
-const { VscArrowLeft, VscArrowRight } = icons
+const { VscArrowLeft, VscArrowRight } = Icons
 
 const Header = () => {
     const { singer } = useParams()
     const navigate = useNavigate()
+    const location = useLocation()
+    const [history, setHistory] = useState()
+    const btnBackRef = useRef()
 
+    useEffect(() => {
+        setHistory(location.key)
+    }, [location.key])
+
+    // console.log({ history: location })
     return (
         <div className={`w-full h-[70px] flex justify-between items-center gap-[10px] z-50`}>
             <div className="w-full h-[40px] flex grow">
                 <div className="flex items-center gap-5">
                     <button
-                        onClick={() => navigate(-1)}
+                        ref={btnBackRef}
+                        onClick={() => navigate(-1) || navigate('/')}
                         className="w-6 h-6 flex items-center disabled:opacity-30"
-                        // disabled
                     >
                         <VscArrowLeft size={24} />
                     </button>
-                    <button onClick={() => navigate(1)} className="w-6 h-6 flex items-center mr-5 ">
+                    <button onClick={() => navigate(1)} className="w-6 h-6 flex items-center mr-5">
                         <VscArrowRight size={24} />
                     </button>
                 </div>
