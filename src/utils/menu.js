@@ -1,6 +1,6 @@
 import { Icons } from '../components'
 
-const { MdOutlineLibraryMusic, MdOutlineHomeMax, TbChartDots2 } = Icons
+const { MdOutlineHomeMax, TbChartDots2, BsStar } = Icons
 
 export const sidebarMenu = [
     {
@@ -14,9 +14,9 @@ export const sidebarMenu = [
         icon: <TbChartDots2 size={24} />,
     },
     {
-        path: 'mymusic',
-        text: 'Thư Viện',
-        icon: <MdOutlineLibraryMusic size={24} />,
+        path: 'top100',
+        text: 'TOP 100',
+        icon: <BsStar size={24} />,
     },
 ]
 

@@ -17,6 +17,7 @@ const Album = () => {
     const dispatch = useDispatch()
     const [playlistData, setPlaylistData] = useState({})
     const overlayRef = useRef()
+    const ref = useRef()
 
     useEffect(() => {
         const fetchDetailPlaylist = async () => {
@@ -39,8 +40,12 @@ const Album = () => {
         }
     }, [pid, playlistData])
 
+    useEffect(() => {
+        ref.current.scrollIntoView()
+    }, [])
+
     return (
-        <div className="w-full flex flex-col text-white relative">
+        <div ref={ref} className="w-full flex flex-col text-white relative">
             {isLoading && (
                 <div className="absolute top-0 right-0 bottom-0 left-0 bg-[#170f23] z-10">
                     <div className="w-creen h-screen flex justify-center items-center ">

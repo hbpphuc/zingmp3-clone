@@ -2,10 +2,11 @@ import React, { useState, useRef, memo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Tippy from '@tippyjs/react'
 import icons from './Icons'
+import { Top100 } from '../pages/public'
 
 const { RiHeartLine, RiHeartFill, RiMoreFill, TbPlayerPlayFilled } = icons
 
-const PlaylistItem = ({ data }) => {
+const PlaylistItem = ({ data, top100 }) => {
     const navigate = useNavigate()
     const [isHover, setIsHover] = useState(false)
     const imageRef = useRef()
@@ -26,7 +27,7 @@ const PlaylistItem = ({ data }) => {
     }
 
     return (
-        <div className="w-1/5">
+        <div className={`w-1/5 mb-[30px] ${top100 && 'pr-7'}`}>
             <div
                 onClick={() => handleGetPath(data)}
                 onMouseEnter={handleImageEnter}

@@ -3,6 +3,7 @@ const routes = {
     HOME: '',
     LOGIN: 'login',
     MY_MUSIC: 'mymusic',
+    TOP_100: 'top100',
     ALBUM_TITLE_ID: 'album/:title/:pid',
     PLAYLIST_TITLE_ID: 'playlist/:title/:pid',
     WEEKCHART_TITLE_ID: 'zing-chart-tuan/:title/:pid',

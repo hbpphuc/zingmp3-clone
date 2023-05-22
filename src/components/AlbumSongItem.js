@@ -15,7 +15,9 @@ const AlbumSongItem = ({ songData, isHideNoteIcon, isHideAlbumTitle, order, rank
                 dispatch(musicAction.setCurSongId(songData?.encodeId))
                 dispatch(musicAction.setPlaying(true))
             }}
-            className={`w-full h-[60px] p-[10px] flex justify-between items-center gap-[10px] rounded-[5px] hover:bg-[#ffffff1a] ${
+            className={`w-full h-[60px] ${
+                isWeekChart ? 'p-[10px_5px]' : 'p-[10px]'
+            } flex justify-between items-center gap-[10px] rounded-[5px] hover:bg-[#ffffff1a] ${
                 curSongId === songData?.encodeId ? 'bg-active-song' : ''
             } border-b border-[#ffffff0d] cursor-pointer`}
         >
@@ -79,12 +81,18 @@ const AlbumSongItem = ({ songData, isHideNoteIcon, isHideAlbumTitle, order, rank
                         <p
                             className={`${
                                 isWeekChart ? 'w-[160px]' : 'w-full'
-                            } min-[1280px]:max-w-full min-[1200px]:max-w-[200px] text-sm font-medium text-white whitespace-nowrap text-ellipsis overflow-hidden`}
+                            } min-[1280px]:max-w-full min-[1200px]:max-w-[200px] text-sm font-medium text-white text-ellipsis line-clamp-1 overflow-hidden`}
                         >
                             {songData.title}
                         </p>
-                        <div className="max-w-full mt-[1px] flex justify-start items-center text-xs text-[#ffffff80]">
-                            <span className="hover:text-purple-hover">{songData.artistsNames}</span>
+                        <div
+                            className={`${
+                                isWeekChart ? 'w-[160px]' : 'w-full'
+                            } mt-[1px] flex justify-start items-center text-xs text-[#ffffff80]`}
+                        >
+                            <span className="hover:text-purple-hover text-ellipsis line-clamp-1 overflow-hidden">
+                                {songData.artistsNames}
+                            </span>
                         </div>
                     </div>
                 </div>

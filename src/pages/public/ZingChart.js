@@ -8,7 +8,7 @@ import { AlbumSongItem, Button, Icons, RankList } from '../../components'
 const { MdPlayCircle } = Icons
 
 const ZingChart = () => {
-    const [ZChart, setZChart] = useState({})
+    const [ZChart, setZChart] = useState(null)
     const [data, setData] = useState(null)
 
     const options = {
@@ -111,7 +111,12 @@ const ZingChart = () => {
                                             <MdPlayCircle size={28} color={'#9b4de0'} className="" />
                                         </span>
                                     </div>
-                                    <RankList data={item[1]?.items} isWeekChart isHideAlbumTitle />
+                                    <RankList
+                                        data={item[1]?.items}
+                                        isWeekChart
+                                        isHideAlbumTitle
+                                        linkTo={item[1]?.link}
+                                    />
                                 </div>
                             ))}
                     </div>

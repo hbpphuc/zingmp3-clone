@@ -2,7 +2,7 @@ import React, { memo, useEffect, useState } from 'react'
 import AlbumSongItem from './AlbumSongItem'
 import Button from './Button'
 
-const RankList = ({ data, isHideAlbumTitle, isWeekChart }) => {
+const RankList = ({ data, isHideAlbumTitle, isWeekChart, linkTo }) => {
     const [showFull, setShowFull] = useState(false)
     const [rankSongs, setRankSongs] = useState(null)
 
@@ -28,13 +28,14 @@ const RankList = ({ data, isHideAlbumTitle, isWeekChart }) => {
                         order={index + 1}
                         rankStt={item.rakingStatus}
                         isHideNoteIcon
-                        isHideAlbumTitle
-                        isWeekChart
+                        isHideAlbumTitle={isHideAlbumTitle}
+                        isWeekChart={isWeekChart}
                     />
                 ))}
             </div>
             <Button
                 onClick={() => setShowFull((prev) => !prev)}
+                to={linkTo}
                 text={`${showFull ? 'Ẩn bớt' : isWeekChart ? 'Xem tất cả' : 'Xem top 100'}`}
                 style={'border-white text-sm font-medium p-[8px_25px] hover:bg-[#ffffff1a]'}
             />

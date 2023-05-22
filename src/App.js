@@ -16,6 +16,7 @@ import {
     Singer,
     SearchSongs,
     ZingChart,
+    Top100,
 } from './pages/public'
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
                     <Route path={routes.PUBLIC} element={<Public />}>
                         <Route path={routes.HOME} element={<Home />} />
                         <Route path={routes.LOGIN} element={<Login />} />
+                        <Route path={routes.TOP_100} element={<Top100 />} />
                         <Route path={routes.ALBUM_TITLE_ID} element={<Album />} />
                         <Route path={routes.PLAYLIST_TITLE_ID} element={<Album />} />
                         <Route path={routes.WEEKCHART_TITLE_ID} element={<WeekChart />} />
