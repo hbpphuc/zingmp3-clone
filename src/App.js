@@ -1,9 +1,10 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Routes, Route } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import * as homeAction from './store/actions/homeAction'
+import * as homeApi from './apis/homeApi'
 import routes from './utils/routes'
 import {
     Home,
@@ -21,8 +22,14 @@ import {
 
 function App() {
     const dispatch = useDispatch()
+    const [chart, setChart] = useState(null)
     useEffect(() => {
         dispatch(homeAction.getHome())
+        const fetchChart = async () => {
+            const result = await homeApi.getChartHome()
+            if (result?.err === 0) setChart(result.data)
+        }
+        fetchChart()
     }, [])
 
     return (
@@ -35,7 +42,10 @@ function App() {
                         <Route path={routes.TOP_100} element={<Top100 />} />
                         <Route path={routes.ALBUM_TITLE_ID} element={<Album />} />
                         <Route path={routes.PLAYLIST_TITLE_ID} element={<Album />} />
-                        <Route path={routes.WEEKCHART_TITLE_ID} element={<WeekChart />} />
+                        <Route
+                            path={routes.WEEKCHART_TITLE_ID}
+                            element={<WeekChart weekChart={chart?.weekChart && Object.values(chart?.weekChart)} />}
+                        />
                         <Route path={routes.SEARCH} element={<Search />}>
                             <Route path={routes.SEARCH_ALL} element={<SearchAll />} />
                             <Route path={routes.SEARCH_SONG} element={<SearchSongs />} />

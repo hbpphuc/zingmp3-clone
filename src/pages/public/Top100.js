@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import * as musicApi from '../../apis/musicApi'
 import { Top100Banner } from '../../assets/images/Images'
 import { Playlist } from '../../components'
@@ -14,8 +14,6 @@ const Top100 = () => {
         fetchTop100()
     }, [])
 
-    console.log(topList)
-
     return (
         <div className="w-full h-[1000px]">
             <div className="w-full mt-[90px] mb-[30px] flex justify-center items-center">
@@ -30,4 +28,4 @@ const Top100 = () => {
     )
 }
 
-export default Top100
+export default memo(Top100)

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Chart } from 'chart.js/auto'
 import { Line } from 'react-chartjs-2'
@@ -87,7 +87,7 @@ const ZingChart = () => {
                 <div className="w-full h-full ">{data && <Line data={data} options={options} />}</div>
             </div>
             <div className="w-full mb-[10px] flex flex-col justify-center items-center">
-                <RankList data={ZChart?.RTChart?.items} />
+                <RankList data={ZChart?.RTChart?.items} limit={10} />
             </div>
             <div className="w-full min-h-[590px] absolute m-[28px_calc(59px_*_-1)]">
                 <div className="bg-blur"></div>
@@ -115,7 +115,8 @@ const ZingChart = () => {
                                         data={item[1]?.items}
                                         isWeekChart
                                         isHideAlbumTitle
-                                        linkTo={item[1]?.link}
+                                        linkTo={item[1]?.link?.split('.')[0]}
+                                        limit={5}
                                     />
                                 </div>
                             ))}
@@ -126,4 +127,4 @@ const ZingChart = () => {
     )
 }
 
-export default ZingChart
+export default memo(ZingChart)
