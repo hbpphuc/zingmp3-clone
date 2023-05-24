@@ -1,15 +1,18 @@
 import Tippy from '@tippyjs/react'
 import React, { useEffect, useRef, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import * as musicApi from '../../apis/musicApi'
-import { ZingAward } from '../../assets/images/Images'
 import { AlbumSongItem, Artist, Button, Icons } from '../../components'
+import { ZingAward } from '../../components/Images'
 import PlaylistItem from '../../components/PlaylistItem'
 
 const { AiOutlineUserAdd, TbPlayerPlayFilled, TbPlayerPauseFilled, MdOutlineArrowForwardIos } = Icons
 
 const Singer = () => {
     const { singer } = useParams()
+    const { currentWidth } = useSelector((state) => state.app)
+
     const [artist, setArtist] = useState(null)
     const ref = useRef()
 
@@ -73,10 +76,7 @@ const Singer = () => {
                             ?.find((item) => item.sectionType === 'song')
                             .items.slice(0, 6)
                             .map((item, index) => (
-                                <div
-                                    className={`w-full min-[1200px]:w-1/2 flex ${index % 2 === 0 ? 'pr-3' : 'pl-3'}`}
-                                    key={index}
-                                >
+                                <div className={`w-full min-[1200px]:w-1/2 flex`} key={index}>
                                     <AlbumSongItem songData={item} isHideNoteIcon isHideAlbumTitle />
                                 </div>
                             ))}
@@ -96,7 +96,7 @@ const Singer = () => {
                             <div className="w-full flex gap-7">
                                 {item?.items.length > 0 &&
                                     item.items
-                                        ?.slice(0, 5)
+                                        ?.filter((i, index) => (currentWidth > 1300 ? index < 5 : index < 4))
                                         .map((item) => <PlaylistItem key={item.encodeId} data={item} />)}
                             </div>
                         </div>
@@ -114,9 +114,12 @@ const Singer = () => {
                             </h3>
                             <div className="w-full flex">
                                 {item?.items
-                                    .filter((i, index) => index <= 4)
+                                    .filter((i, index) => (currentWidth > 1300 ? index < 5 : index < 4))
                                     .map((item) => (
-                                        <div key={item.encodeId} className="w-[20%] artist">
+                                        <div
+                                            key={item.encodeId}
+                                            className={`artist ${currentWidth > 1300 ? 'w-[20%]' : 'w-[25%]'}`}
+                                        >
                                             <Artist data={item} />
                                         </div>
                                     ))}
@@ -127,8 +130,8 @@ const Singer = () => {
                     <h3 className="w-full mb-5 flex justify-between items-center">
                         <span className="text-xl font-bold">Về {artist?.name}</span>
                     </h3>
-                    <div className="w-[942.72px] flex gap-7">
-                        <div className="w-[50%] h-[304.238px] rounded-lg">
+                    <div className="w-[90%] flex gap-7">
+                        <div className="flex-1 h-[304.238px] rounded-lg">
                             <img
                                 src={artist?.thumbnailM}
                                 alt={artist?.name}

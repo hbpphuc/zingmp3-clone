@@ -13,7 +13,7 @@ const Album = () => {
     const { pid } = useParams()
     const location = useLocation()
     const { isPlaying, curSongId, curSongData } = useSelector((state) => state.music)
-    const { isLoading } = useSelector((state) => state.app)
+    const { isLoading, currentWidth } = useSelector((state) => state.app)
     const dispatch = useDispatch()
     const [playlistData, setPlaylistData] = useState({})
     const overlayRef = useRef()
@@ -56,9 +56,9 @@ const Album = () => {
                     </div>
                 </div>
             )}
-            <div className="w-full my-[30px] flex flex-col min-[1200px]:flex-row justify-start items-start gap-7 relative">
-                <div className="flex-1 h-[540px] pb-[30px] flex min-[1200px]:flex-col min-[1200px]:sticky top-[110px]">
-                    <div className="w-[300px] h-auto mr-5 min-[1200px]:mr-0 rounded-lg shadow-[0_5px_8px_0_rgba(0,0,0,0.2)] overflow-hidden relative">
+            <div className="w-full my-[30px] flex flex-col xl:flex-row justify-start items-start gap-7 relative">
+                <div className="flex-1 h-[540px] xl:pb-[30px] pb-0 flex xl:flex-col xl:sticky top-[110px]">
+                    <div className="w-[200px] xl:w-full h-auto mr-5 min-[1260px]:mr-0 rounded-lg shadow-[0_5px_8px_0_rgba(0,0,0,0.2)] overflow-hidden relative">
                         <img
                             src={playlistData.thumbnailM}
                             alt={playlistData.title}
@@ -95,14 +95,14 @@ const Album = () => {
                             )}
                         </div>
                     </div>
-                    <div className="flex-1 mt-3 flex flex-col items-center">
-                        <div className="flex flex-col items-center">
-                            <h3 className="text-xl font-bold">{playlistData?.title}</h3>
-                            <div className="flex flex-col items-center">
+                    <div className="flex-1 mt-3 flex flex-col items-start">
+                        <div className="flex flex-col xl:items-start">
+                            <h3 className="xl:text-center text-xl font-bold">{playlistData?.title}</h3>
+                            <div className="flex flex-col xl:items-center">
                                 <p className="text-xs text-[#ffffff80] leading-[1.75]">
                                     Cập nhật: {moment.unix(playlistData?.contentLastUpdate).format('DD/MM/YYYY')}
                                 </p>
-                                <p className="flex justify-center items-center flex-wrap text-xs text-[#ffffff80] leading-[1.75] text-center hover:singer-hover">
+                                <p className="flex xl:justify-center items-center flex-wrap text-xs text-[#ffffff80] leading-[1.75] text-center hover:singer-hover">
                                     {playlistData?.artists?.map((item) => (
                                         <Link
                                             to={item.link}
@@ -117,19 +117,31 @@ const Album = () => {
                                     {Math.floor(playlistData?.like / 1000)}K người yêu thích
                                 </p>
                             </div>
+                            {currentWidth < 1280 && (
+                                <div className="mb-[10px] mt-4">
+                                    <span className="text-sm text-[#ffffff80]">Lời tựa </span>
+                                    <span className="text-sm text-white text-ellipsis line-clamp-2 overflow-hidden">
+                                        {playlistData.sortDescription}
+                                    </span>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
-                <div className="w-full min-[1200px]:w-[75%]">
-                    <div className="mb-[10px]">
-                        <span className="text-sm text-[#ffffff80]">Lời tựa </span>
-                        <span className="text-sm text-white">{playlistData.sortDescription}</span>
-                    </div>
+                <div className="w-full xl:w-[70%]">
+                    {currentWidth >= 1280 && (
+                        <div className="mb-[10px]">
+                            <span className="text-sm text-[#ffffff80]">Lời tựa </span>
+                            <span className="text-sm text-white text-ellipsis line-clamp-3 overflow-hidden">
+                                {playlistData.sortDescription}
+                            </span>
+                        </div>
+                    )}
                     <AlbumSongList />
                 </div>
             </div>
-            <div>ARTIST CHANNEL</div>
-            <div>ARTIST PLAYLIST</div>
+            {/* <div>ARTIST CHANNEL</div>
+            <div>ARTIST PLAYLIST</div> */}
         </div>
     )
 }

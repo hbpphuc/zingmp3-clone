@@ -6,7 +6,7 @@ import { NowPlayingBar, Player } from '../../components'
 
 const Public = () => {
     const { curSongId } = useSelector((state) => state.music)
-    const { isPLayingBar } = useSelector((state) => state.app)
+    const { isPLayingBar, currentWidth } = useSelector((state) => state.app)
 
     const { singer } = useParams()
     const [scrollTop, setScrollTop] = useState(true)
@@ -27,7 +27,7 @@ const Public = () => {
     return (
         <div ref={ref} className="w-full min-h-full flex flex-col overflow-y-auto relative">
             <div onScroll={handleScroll} className="flex-auto w-full max-h-full flex overflow-y-auto relative ">
-                <div className="w-[240px] h-full bg-[#ffffff0d] fixed">
+                <div className="w-[70x] min-[1133px]:w-[240px] h-full bg-[#ffffff0d] fixed">
                     <Sidebar />
                 </div>
                 <div
@@ -39,8 +39,8 @@ const Public = () => {
                 >
                     <Header />
                 </div>
-                <div className="w-[calc(100%_-_240px)] text-white px-[59px] absolute right-0">
-                    <div className="w-full mt-[70px]">
+                <div className="w-[calc(100%_-_70px)] min-[1133px]:w-[calc(100%_-_240px)] text-white px-[59px] absolute right-0">
+                    <div className="w-full h-full mt-[70px]">
                         <Outlet />
                     </div>
                 </div>

@@ -31,7 +31,7 @@ const PlaylistItem = ({ data, top100 }) => {
     }
 
     return (
-        <div className={`w-1/5 mb-[30px] ${top100 && 'pr-7'}`}>
+        <div className={`w-1/4 min-[1300px]:w-1/5 mb-[30px] ${top100 && 'pr-7'}`}>
             <div
                 onClick={() => handleGetPath(data)}
                 onMouseEnter={handleImageEnter}

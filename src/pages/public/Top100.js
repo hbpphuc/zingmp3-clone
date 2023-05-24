@@ -1,6 +1,6 @@
 import React, { memo, useEffect, useState } from 'react'
 import * as musicApi from '../../apis/musicApi'
-import { Top100Banner } from '../../assets/images/Images'
+import { Top100Banner } from '../../components/Images'
 import { Playlist } from '../../components'
 
 const Top100 = () => {

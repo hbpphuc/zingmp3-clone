@@ -9,8 +9,9 @@ const { FiMusic, BsCaretDownFill, BsCaretUpFill, TbMinus } = icons
 
 const AlbumSongItem = ({ songData, isHideNoteIcon, isHideAlbumTitle, order, rankStt, isWeekChart }) => {
     const { curSongId } = useSelector((state) => state.music)
+    const { currentWidth } = useSelector((state) => state.app)
+
     const dispatch = useDispatch()
-    console.log(songData)
     return (
         <div
             onClick={(e) => {
@@ -84,23 +85,23 @@ const AlbumSongItem = ({ songData, isHideNoteIcon, isHideAlbumTitle, order, rank
                     <div className="flex-auto flex flex-col justify-center">
                         <p
                             className={`${
-                                isWeekChart ? 'w-[160px]' : 'w-full'
-                            } min-[1280px]:max-w-full min-[1200px]:max-w-[200px] text-sm font-medium text-white text-ellipsis line-clamp-1 overflow-hidden`}
+                                currentWidth > 1300 && isWeekChart ? 'w-[160px]' : 'w-full'
+                            } text-sm font-medium text-white text-ellipsis line-clamp-1 overflow-hidden`}
                         >
                             {songData.title}
                         </p>
                         <div
                             className={`${
-                                isWeekChart ? 'w-[160px]' : 'w-full'
-                            } mt-[1px] flex justify-start items-center text-xs text-[#ffffff80]`}
+                                currentWidth > 1300 ? (isWeekChart ? 'w-[160px]' : 'w-full') : 'w-[200px]'
+                            } mt-[1px] flex justify-start items-center text-xs text-[#ffffff80] text-ellipsis line-clamp-1 overflow-hidden`}
                         >
-                            <span className="flex icenter gap-1 text-ellipsis line-clamp-1 overflow-hidden">
+                            <span className="w-full flex items-center gap-1 overflow-hidden">
                                 {songData?.artists?.map((item) => (
                                     <Link
                                         onClick={(e) => e.stopPropagation()}
                                         to={item.link}
                                         key={item.encodeId}
-                                        className="cursor-pointer hover:text-purple-hover"
+                                        className="whitespace-nowrap cursor-pointer hover:text-purple-hover"
                                     >
                                         {item.name}
                                     </Link>
@@ -111,11 +112,11 @@ const AlbumSongItem = ({ songData, isHideNoteIcon, isHideAlbumTitle, order, rank
                 </div>
             </div>
             {!isHideAlbumTitle && (
-                <div className="w-[35%] flex justify-start items-center">
+                <div className="w-[35%] flex justify-start items-center line-clamp-1 overflow-hidden text-ellipsis">
                     <Link
                         onClick={(e) => e.stopPropagation()}
                         to={songData?.album?.link.split('.')[0]}
-                        className="w-full font-normal whitespace-nowrap text-sm text-ellipsis text-[#ffffff80] overflow-hidden hover:text-purple-hover"
+                        className="w-full font-medium whitespace-nowrap text-xs text-[#ffffff80] hover:text-purple-hover"
                     >
                         {songData?.album?.title}
                     </Link>

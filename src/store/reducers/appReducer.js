@@ -13,6 +13,7 @@ const initState = {
     weekChart: [],
     isLoading: false,
     isPLayingBar: false,
+    currentWidth: null,
 }
 
 const appReducer = (state = initState, action) => {
@@ -36,10 +37,17 @@ const appReducer = (state = initState, action) => {
                 ...state,
                 isLoading: action.flag,
             }
+
         case actionTypes.PLAYING_BAR:
             return {
                 ...state,
                 isPLayingBar: action.flag,
+            }
+
+        case actionTypes.CURRENT_WIDTH:
+            return {
+                ...state,
+                currentWidth: action.width,
             }
 
         default:

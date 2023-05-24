@@ -2,6 +2,7 @@ const actionTypes = {
     GET_HOME: 'GET_HOME',
     LOADING: 'LOADING',
     PLAYING_BAR: 'PLAYING_BAR',
+    CURRENT_WIDTH: 'CURRENT_WIDTH',
 
     // music
     SET_CUR_SONG_ID: 'SET_CUR_SONG_ID',

@@ -1,10 +1,13 @@
 import React, { memo } from 'react'
+import { useSelector } from 'react-redux'
 import icons from './Icons'
 import PlaylistItem from './PlaylistItem'
 
 const { MdOutlineArrowForwardIos } = icons
 
 const Playlist = ({ data, top100, viewType }) => {
+    const { currentWidth } = useSelector((state) => state.app)
+
     return (
         <div className="w-full text-white mt-12">
             <div className="w-full mb-5 flex justify-between items-center">
@@ -21,7 +24,9 @@ const Playlist = ({ data, top100, viewType }) => {
             <div className={`w-full flex ${top100 ? 'flex-wrap' : 'gap-7'}`}>
                 {data?.items?.length > 0 &&
                     data?.items
-                        ?.filter((i, index) => (top100 && viewType !== 'slider' ? index : index < 5))
+                        ?.filter((i, index) =>
+                            top100 && viewType !== 'slider' ? index : currentWidth < 1300 ? index < 4 : index < 5,
+                        )
                         .map((item, index) => <PlaylistItem key={item.encodeId} data={item} top100={top100} />)}
             </div>
         </div>

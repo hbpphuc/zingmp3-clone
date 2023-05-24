@@ -68,13 +68,13 @@ const HZingChart = () => {
     }, [hZChart])
 
     return (
-        <div className="w-full h-[413px] mt-[48px] rounded-lg overflow-hidden relative bg-[#2b273f]">
+        <div className="w-full h-[771px] min-[1256px]:h-[413px] mt-[48px] rounded-lg overflow-hidden relative bg-[#2b273f]">
             <div className="absolute top-0 right-0 bottom-0 left-0 bg-[#33104cf2]">
                 <div className="zingchart-top-alpha"></div>
                 <div className="zingchart-bottom-alpha"></div>
             </div>
             <div className="absolute top-0 right-0 bottom-0 left-0 p-5 flex flex-col">
-                <div className="mb-5 flex items-center gap-2 text-[28px] font-bold leading-normal text-white">
+                <div className="w-full h-[54px] mb-5 flex items-center gap-2 text-[28px] font-bold leading-normal text-white">
                     <Link to={routes.ZING_CHART} className="zingchart-text">
                         #zingchart
                     </Link>
@@ -82,8 +82,8 @@ const HZingChart = () => {
                         <MdPlayCircle size={30} className="text-white" />
                     </span>
                 </div>
-                <div className="h-full flex justify-center gap-7">
-                    <div className="flex-4 flex flex-col items-center">
+                <div className="flex-1 flex flex-col-reverse min-[1256px]:flex-row justify-center gap-7">
+                    <div className="w-full min-[1256px]:w-[40%] flex flex-col items-center">
                         {hZCRank.slice(0, 3).map((item, index) => (
                             <div
                                 key={item.encodeId}
@@ -102,7 +102,9 @@ const HZingChart = () => {
                             style={'py-[0.5rem] mt-[5px] mr-0 border border-white hover:bg-[#ffffff1a]'}
                         />
                     </div>
-                    <div className="flex-6 h-full ">{data && <Line data={data} options={options} />}</div>
+                    <div className="w-full min-[1256px]:w-[60%] h-full ">
+                        {data && <Line data={data} options={options} />}
+                    </div>
                 </div>
             </div>
         </div>

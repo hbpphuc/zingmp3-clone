@@ -23,6 +23,8 @@ import {
 function App() {
     const dispatch = useDispatch()
     const [chart, setChart] = useState(null)
+    const [deviceWidth, setDeviceWidth] = useState(window.innerWidth)
+
     useEffect(() => {
         dispatch(homeAction.getHome())
         const fetchChart = async () => {
@@ -31,6 +33,22 @@ function App() {
         }
         fetchChart()
     }, [])
+
+    const setWidth = (e) => {
+        setDeviceWidth(e.target.innerWidth)
+    }
+
+    useEffect(() => {
+        window.addEventListener('resize', setWidth)
+
+        return () => {
+            window.removeEventListener('resize', setWidth)
+        }
+    }, [])
+
+    useEffect(() => {
+        dispatch(homeAction.setWidth(deviceWidth))
+    }, [deviceWidth])
 
     return (
         <>

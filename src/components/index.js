@@ -1,4 +1,5 @@
 export { default as Icons } from './Icons'
+export * as Images from './Images'
 export { default as SearchBar } from './SearchBar'
 export { default as Slider } from './Slider'
 export { default as Player } from './Player'

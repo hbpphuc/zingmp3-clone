@@ -82,7 +82,7 @@
 }
 
 .main-header {
-    @apply min-w-[660px] h-[70px] px-[59px] flex items-center fixed left-[240px] top-0 right-0 text-white z-50;
+    @apply w-[calc(100%_-_70px)] min-[1133px]:w-[calc(100%_-_240px)] h-[70px] px-[59px] flex items-center fixed left-[70px] min-[1133px]:left-[240px] top-0 right-0 text-white z-50;
 }
 
 .is-collapse {

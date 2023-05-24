@@ -48,7 +48,7 @@ const SongItem = ({ data, releaseDate, order, percent, sm, isActive }) => {
                     <div
                         className={`w-full mt-[3px] text-xs font-normal ${
                             sm ? 'text-[#ffffff99]' : 'text-[#ffffff80]'
-                        } leading-[1.33]`}
+                        } leading-[1.33] line-clamp-1 text-ellipsis overflow-hidden`}
                     >
                         {data.artistsNames}
                     </div>
@@ -61,7 +61,7 @@ const SongItem = ({ data, releaseDate, order, percent, sm, isActive }) => {
                     )}
                 </div>
             </div>
-            {percent && <div className="mr-[5px] text-base font-bold cursor-default">{percent}</div>}
+            {percent && <div className="mx-[5px] text-base font-bold cursor-default">{percent}</div>}
         </div>
     )
 }

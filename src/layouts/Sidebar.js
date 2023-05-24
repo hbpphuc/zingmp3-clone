@@ -1,6 +1,8 @@
 import React from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
-import { LogoDark, LogoLight } from '../assets/images/Images'
+import { useSelector } from 'react-redux'
+import logo from '../assets/images/icon_zing_mp3_60.f6b51045.svg'
+import { LogoDark } from '../components/Images'
 import { sidebarMenu } from '../utils/menu'
 import routes from '../utils/routes'
 
@@ -11,12 +13,17 @@ const activeStyle = {
 }
 
 const Sidebar = () => {
+    const { currentWidth } = useSelector((state) => state.app)
     const navigate = useNavigate()
     return (
         <div className="flex flex-col">
-            <div className="w-full h-[70px] pl-7 pr-[25px] flex items-center">
+            <div className="w-full h-[70px] min-[1133px]:pl-7 min-[1133px]:pr-[25px] flex items-center justify-center min-[1133px]:justify-start">
                 <div className="cursor-pointer hover:opacity-90" onClick={() => navigate(routes.HOME)}>
-                    <LogoDark className="w-[120px] h-[40px] object-cover" />
+                    {currentWidth < 1133 ? (
+                        <img src={logo} alt="logo" />
+                    ) : (
+                        <LogoDark className="w-[120px] h-[40px] object-cover" />
+                    )}
                 </div>
             </div>
 
@@ -30,7 +37,7 @@ const Sidebar = () => {
                         }
                     >
                         <span className="fill-current border-transparent">{item.icon}</span>
-                        <span>{item.text}</span>
+                        <span className="hidden min-[1133px]:flex">{item.text}</span>
                     </NavLink>
                 ))}
             </div>

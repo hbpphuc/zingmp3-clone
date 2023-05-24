@@ -6,7 +6,6 @@ import * as musicAction from '../../store/actions'
 const SearchSongs = () => {
     const { searchData, artistSong } = useSelector((state) => state.music)
     const dispatch = useDispatch()
-    console.log({ searchData, artistSong })
 
     useEffect(() => {
         dispatch(musicAction.getArtistSong(searchData?.top?.id))

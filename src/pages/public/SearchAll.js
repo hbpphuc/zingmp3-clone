@@ -9,6 +9,7 @@ const { MdOutlineArrowForwardIos } = Icons
 
 const SearchAll = () => {
     const { searchData } = useSelector((state) => state.music)
+    const { currentWidth } = useSelector((state) => state.app)
 
     return (
         <div className="w-full h-[400px] flex flex-col">
@@ -107,10 +108,7 @@ const SearchAll = () => {
                 </h3>
                 <div className="w-full flex justify-between items-center flex-wrap">
                     {searchData?.songs.slice(0, 6).map((item, index) => (
-                        <div
-                            className={`w-full min-[1200px]:w-1/2 flex ${index % 2 === 0 ? 'pr-3' : 'pl-3'}`}
-                            key={item.encodeId}
-                        >
+                        <div className={`w-full min-[1200px]:w-1/2 flex`} key={item.encodeId}>
                             <AlbumSongItem songData={item} isHideNoteIcon isHideAlbumTitle />
                         </div>
                     ))}
@@ -128,7 +126,7 @@ const SearchAll = () => {
                 <div className="w-full flex gap-7">
                     {searchData?.playlists?.length > 0 &&
                         searchData?.playlists
-                            ?.slice(0, 5)
+                            ?.filter((i, index) => (currentWidth < 1300 ? index < 4 : index < 5))
                             .map((item) => <PlaylistItem key={item.encodeId} data={item} />)}
                 </div>
             </div>
@@ -146,7 +144,7 @@ const SearchAll = () => {
                         searchData?.artists
                             .filter((i, index) => index <= 4)
                             .map((item) => (
-                                <div key={item.encodeId} className="w-[20%] artist">
+                                <div key={item.encodeId} className="w-[25%] xl:w-[20%] artist">
                                     <Artist data={item} />
                                 </div>
                             ))}
