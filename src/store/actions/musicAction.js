@@ -2,10 +2,20 @@ import actionTypes from './actionTypes'
 import * as musicApi from '../../apis/musicApi'
 
 export const setPlaylist = (listSong) => ({ type: actionTypes.PLAYLIST, listSong })
+
 export const setCurSongId = (songId) => ({ type: actionTypes.SET_CUR_SONG_ID, songId })
+
 export const setPlaying = (flag) => ({ type: actionTypes.PLAY, flag })
+
 export const vipSong = (flag) => ({ type: actionTypes.VIPSONG, flag })
+
 export const loading = (flag) => ({ type: actionTypes.LOADING, flag })
+
+export const setCurSongData = (data) => ({ type: actionTypes.SET_CUR_SONG_DATA, data })
+
+export const setCurAlbumId = (pid) => ({ type: actionTypes.SET_CUR_ALBUM_DATA, pid })
+
+export const setRecentSongs = (data) => ({ type: actionTypes.SET_RECENT, data })
 
 export const search = (keyword) => async (dispatch) => {
     try {

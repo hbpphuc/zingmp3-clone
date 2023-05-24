@@ -32,7 +32,9 @@ const {
 let intervalId
 
 const Player = () => {
-    const { curSongId, isPlaying, listSong } = useSelector((state) => state.music)
+    const { curSongId, isPlaying, listSong, curAlbumId } = useSelector((state) => state.music)
+    const { isPLayingBar } = useSelector((state) => state.app)
+
     const dispatch = useDispatch()
     const [songinfo, setSonginfo] = useState(null)
     const [audio, setAudio] = useState(new Audio())
@@ -41,6 +43,7 @@ const Player = () => {
     const [repeat, setRepeat] = useState(0)
     const [loading, setLoading] = useState(false)
     const [volume, setVolume] = useState(1)
+    const [isDisplay, setIsDisPlay] = useState(isPLayingBar)
 
     const [debounceSongId] = useDebounce(curSongId, 500)
 
@@ -48,6 +51,7 @@ const Player = () => {
     const trackRef = useRef()
     const volumeTrackRef = useRef()
     const volumeThumbRef = useRef()
+    const listPlayingBtnRef = useRef()
 
     useEffect(() => {
         const fetchInfoSong = async () => {
@@ -62,6 +66,7 @@ const Player = () => {
                 audio.load()
                 if (res2?.err === 0) {
                     setSonginfo(res2.data)
+                    dispatch(musicAction.setCurSongData(res2.data))
                 }
             } else {
                 toast.warning(res1.msg)
@@ -124,6 +129,20 @@ const Player = () => {
         }
     }, [volume])
 
+    useEffect(() => {
+        const playlistBtn = listPlayingBtnRef.current
+        const handleToggleDisplay = () => {
+            setIsDisPlay((prev) => !prev)
+            dispatch(musicAction.togglePlayingBar(!isDisplay))
+        }
+
+        playlistBtn.addEventListener('click', handleToggleDisplay)
+
+        return () => {
+            playlistBtn.removeEventListener('click', handleToggleDisplay)
+        }
+    }, [isDisplay])
+
     const handlePlaySong = () => {
         if (isPlaying) {
             audio.pause()
@@ -142,7 +161,7 @@ const Player = () => {
         setCurSecond(Math.round((songinfo.duration * percent) / 100))
     }
 
-    const handleNextSong = () => {
+    const handleNextSong = (e) => {
         audio.play()
         if (listSong) {
             let curSongIndex
@@ -153,10 +172,12 @@ const Player = () => {
             })
             dispatch(musicAction.setCurSongId(listSong[curSongIndex + 1].encodeId))
             dispatch(musicAction.setPlaying(true))
+        } else {
+            e.preventDefault()
         }
     }
 
-    const handlePrevSong = () => {
+    const handlePrevSong = (e) => {
         if (listSong) {
             let curSongIndex
             listSong?.forEach((item, index) => {
@@ -166,6 +187,9 @@ const Player = () => {
             })
             dispatch(musicAction.setCurSongId(listSong[curSongIndex - 1].encodeId))
             dispatch(musicAction.setPlaying(true))
+        } else {
+            e.preventDefault()
+            alert('aaa')
         }
     }
 
@@ -336,7 +360,14 @@ const Player = () => {
                     </div>
                 </div>
                 <Tippy content="Danh sách phát" className="text-xs ml-5">
-                    <button className="w-[30px] h-[30px] flex justify-center items-center rounded bg-[#ffffff1a] hover:bg-[#ffffff33]">
+                    <button
+                        ref={listPlayingBtnRef}
+                        className={`w-[30px] h-[30px] flex justify-center items-center rounded ${
+                            isDisplay
+                                ? 'bg-[#9b4de0] text-white hover:brightness-90'
+                                : 'bg-[#ffffff1a] hover:bg-[#ffffff33]'
+                        }`}
+                    >
                         <MdOutlineQueueMusic className="w-full h-full p-[5px] " />
                     </button>
                 </Tippy>

@@ -7,10 +7,15 @@ import musicReducer from './musicReducer'
 
 const commonConfig = { storage, stateReconciler: autoMergeLevel2 }
 
-const musicConfig = { ...commonConfig, key: 'MUSIC', whitelist: ['curSongId'] }
+const appConfig = { ...commonConfig, key: 'APP', whitelist: ['isPLayingBar'] }
+const musicConfig = {
+    ...commonConfig,
+    key: 'MUSIC',
+    whitelist: ['curSongId', 'curSongData', 'curAlbumId', 'recentSongs'],
+}
 
 const rootReducer = combineReducers({
-    app: appReducer,
+    app: persistReducer(appConfig, appReducer),
     music: persistReducer(musicConfig, musicReducer),
 })
 export default rootReducer

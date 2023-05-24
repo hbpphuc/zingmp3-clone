@@ -12,6 +12,7 @@ const initState = {
     hZChart: {},
     weekChart: [],
     isLoading: false,
+    isPLayingBar: false,
 }
 
 const appReducer = (state = initState, action) => {
@@ -34,6 +35,11 @@ const appReducer = (state = initState, action) => {
             return {
                 ...state,
                 isLoading: action.flag,
+            }
+        case actionTypes.PLAYING_BAR:
+            return {
+                ...state,
+                isPLayingBar: action.flag,
             }
 
         default:

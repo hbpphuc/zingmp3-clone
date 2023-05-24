@@ -1,19 +1,23 @@
 import React, { memo } from 'react'
 import moment from 'moment'
 import 'moment/locale/vi'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import * as musicAction from '../store/actions'
 
-const SongItem = ({ data, releaseDate, order, percent }) => {
+const SongItem = ({ data, releaseDate, order, percent, sm, isActive }) => {
+    const { curSongId } = useSelector((state) => state.music)
     const dispatch = useDispatch()
 
     return (
         <div
             onDoubleClick={() => {
-                dispatch(musicAction.setCurSongId(data.encodeId))
+                dispatch(musicAction.setCurSongId(data?.encodeId))
                 dispatch(musicAction.setPlaying(true))
+                dispatch(musicAction.setRecentSongs({ data }))
             }}
-            className="w-full flex justify-between items-center p-[10px] rounded hover:bg-[#ffffff1a] relative"
+            className={`w-full flex justify-between items-center ${sm ? 'p-[8px]' : 'p-[10px]'} rounded ${
+                isActive ? 'bg-[#9b4de0]' : 'bg-transparent hover:bg-[#ffffff1a]'
+            } relative`}
         >
             <div className="flex items-center">
                 {order && (
@@ -27,10 +31,13 @@ const SongItem = ({ data, releaseDate, order, percent }) => {
                 )}
                 <div
                     onClick={() => {
-                        dispatch(musicAction.setCurSongId(data.encodeId))
+                        dispatch(musicAction.setCurSongId(data?.encodeId))
                         dispatch(musicAction.setPlaying(true))
+                        dispatch(musicAction.setRecentSongs({ data }))
                     }}
-                    className="w-[60px] h-[60px] mr-[10px] rounded cursor-pointer aspect-square"
+                    className={`${
+                        sm ? 'w-[40px] h-[40px]' : 'w-[60px] h-[60px]'
+                    } mr-[10px] rounded cursor-pointer aspect-square`}
                 >
                     <img src={data.thumbnail} alt={data.title} className="rounded object-cover aspect-square" />
                 </div>
@@ -38,7 +45,11 @@ const SongItem = ({ data, releaseDate, order, percent }) => {
                     <div className="w-full text-sm font-medium leading-[1.33] line-clamp-1 text-ellipsis overflow-hidden">
                         {data.title}
                     </div>
-                    <div className="w-full mt-[3px] text-xs font-normal text-[#ffffff80] leading-[1.33]">
+                    <div
+                        className={`w-full mt-[3px] text-xs font-normal ${
+                            sm ? 'text-[#ffffff99]' : 'text-[#ffffff80]'
+                        } leading-[1.33]`}
+                    >
                         {data.artistsNames}
                     </div>
                     {releaseDate && (

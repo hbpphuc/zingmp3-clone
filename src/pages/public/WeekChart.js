@@ -13,13 +13,14 @@ const activeStyle = {
 
 const WeekChart = ({ weekChart }) => {
     const { pid } = useParams()
-    const { listSong } = useSelector((state) => state.music)
+    const { listSong, curAlbumId } = useSelector((state) => state.music)
     const dispatch = useDispatch()
     const playBtnRef = useRef()
 
     useEffect(() => {
         dispatch(musicAction.setPlaylist(weekChart?.find((item) => item?.link?.includes(pid))?.items))
-    }, [pid])
+        dispatch(musicAction.setCurAlbumId(weekChart?.find((item) => item?.link?.includes(pid))?.playlistId))
+    }, [pid, curAlbumId])
 
     const handleSetPlaylist = () => {
         if (listSong.length > 0) {

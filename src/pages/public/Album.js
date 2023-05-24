@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { useParams, useLocation } from 'react-router-dom'
+import React, { memo, useEffect, useRef, useState } from 'react'
+import { useParams, useLocation, Link } from 'react-router-dom'
 import moment from 'moment/moment'
 import { useDispatch, useSelector } from 'react-redux'
 import { Audio } from 'react-loader-spinner'
@@ -12,7 +12,7 @@ const { TbPlayerPlayFilled } = Icons
 const Album = () => {
     const { pid } = useParams()
     const location = useLocation()
-    const { isPlaying } = useSelector((state) => state.music)
+    const { isPlaying, curSongId, curSongData } = useSelector((state) => state.music)
     const { isLoading } = useSelector((state) => state.app)
     const dispatch = useDispatch()
     const [playlistData, setPlaylistData] = useState({})
@@ -25,7 +25,8 @@ const Album = () => {
             const res = await musicApi.apiGetDetailPlaylist(pid)
             dispatch(musicAction.loading(false))
             if (res?.err === 0) {
-                setPlaylistData(res.data)
+                setPlaylistData(res?.data)
+                dispatch(musicAction.setCurAlbumId(res?.data?.encodeId))
                 dispatch(musicAction.setPlaylist(res?.data?.song.items))
             }
         }
@@ -36,7 +37,9 @@ const Album = () => {
     useEffect(() => {
         if (location.state?.playAlbum) {
             dispatch(musicAction.setCurSongId(playlistData?.song?.items[0]?.encodeId))
+            dispatch(musicAction.setCurAlbumId(location.state?.albumId))
             dispatch(musicAction.setPlaying(true))
+            dispatch(musicAction.setRecentSongs({ data: curSongData }))
         }
     }, [pid, playlistData])
 
@@ -94,16 +97,24 @@ const Album = () => {
                     </div>
                     <div className="flex-1 mt-3 flex flex-col items-center">
                         <div className="flex flex-col items-center">
-                            <h3 className="text-xl font-bold">{playlistData.title}</h3>
+                            <h3 className="text-xl font-bold">{playlistData?.title}</h3>
                             <div className="flex flex-col items-center">
                                 <p className="text-xs text-[#ffffff80] leading-[1.75]">
-                                    Cập nhật: {moment.unix(playlistData.contentLastUpdate).format('DD/MM/YYYY')}
+                                    Cập nhật: {moment.unix(playlistData?.contentLastUpdate).format('DD/MM/YYYY')}
                                 </p>
-                                <p className="text-xs text-[#ffffff80] leading-[1.75] text-center hover:singer-hover">
-                                    {playlistData.artistsNames}
+                                <p className="flex justify-center items-center flex-wrap text-xs text-[#ffffff80] leading-[1.75] text-center hover:singer-hover">
+                                    {playlistData?.artists?.map((item) => (
+                                        <Link
+                                            to={item.link}
+                                            key={item.encodeId}
+                                            className="mr-1 cursor-pointer hover:text-purple-hover"
+                                        >
+                                            {item.name}
+                                        </Link>
+                                    ))}
                                 </p>
                                 <p className="text-xs text-[#ffffff80] leading-[1.75]">
-                                    {Math.floor(playlistData.like / 1000)}K người yêu thích
+                                    {Math.floor(playlistData?.like / 1000)}K người yêu thích
                                 </p>
                             </div>
                         </div>
@@ -123,4 +134,4 @@ const Album = () => {
     )
 }
 
-export default Album
+export default memo(Album)

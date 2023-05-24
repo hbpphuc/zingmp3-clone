@@ -16,9 +16,18 @@ const NewRelease = () => {
     const [homeSongs, setHomeSongs] = useState([])
 
     useEffect(() => {
-        if (active === 0) setHomeSongs(newRelease?.items?.all)
-        if (active === 1) setHomeSongs(newRelease?.items?.vPop)
-        if (active === 2) setHomeSongs(newRelease?.items?.others)
+        if (active === 0) {
+            setHomeSongs(newRelease?.items?.all)
+            dispatch(musicAction.setPlaylist(newRelease?.items?.all))
+        }
+        if (active === 1) {
+            setHomeSongs(newRelease?.items?.vPop)
+            dispatch(musicAction.setPlaylist(newRelease?.items?.vPop))
+        }
+        if (active === 2) {
+            setHomeSongs(newRelease?.items?.others)
+            dispatch(musicAction.setPlaylist(newRelease?.items?.others))
+        }
     }, [active, newRelease])
 
     return (

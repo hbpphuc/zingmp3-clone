@@ -22,3 +22,5 @@ export const getHome = () => async (dispatch) => {
         })
     }
 }
+
+export const togglePlayingBar = (flag) => ({ type: actionTypes.PLAYING_BAR, flag })

@@ -2,10 +2,12 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Outlet, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { Header, Sidebar } from '../../layouts'
-import { Player } from '../../components'
+import { NowPlayingBar, Player } from '../../components'
 
 const Public = () => {
     const { curSongId } = useSelector((state) => state.music)
+    const { isPLayingBar } = useSelector((state) => state.app)
+
     const { singer } = useParams()
     const [scrollTop, setScrollTop] = useState(true)
     const ref = useRef()
@@ -46,6 +48,11 @@ const Public = () => {
             {curSongId && (
                 <div className="flex-none w-full h-[90px] px-5 relative left-0 right-0 bottom-0 bg-[#130c1c] text-white border-t-1 border-[#ffffff1a]">
                     <Player />
+                </div>
+            )}
+            {isPLayingBar && (
+                <div className="w-[330px] h-[calc(100%_-_90px)] absolute top-0 right-0 bg-[#120822] z-[60] text-white">
+                    <NowPlayingBar />
                 </div>
             )}
         </div>

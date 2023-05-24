@@ -1,8 +1,9 @@
 import React, { useState, useRef, memo } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import * as musicAction from '../store/actions'
 import Tippy from '@tippyjs/react'
 import icons from './Icons'
-import { Top100 } from '../pages/public'
 
 const { RiHeartLine, RiHeartFill, RiMoreFill, TbPlayerPlayFilled } = icons
 
@@ -10,6 +11,9 @@ const PlaylistItem = ({ data, top100 }) => {
     const navigate = useNavigate()
     const [isHover, setIsHover] = useState(false)
     const imageRef = useRef()
+
+    const { recentSongs } = useSelector((state) => state.music)
+    const dispatch = useDispatch()
 
     const handleGetPath = (item) => {
         navigate(item?.link?.split('.')[0], { state: { playAlbum: false } })
@@ -50,7 +54,10 @@ const PlaylistItem = ({ data, top100 }) => {
                             <button
                                 onClick={(e) => {
                                     e.stopPropagation()
-                                    navigate(data?.link?.split('.')[0], { state: { playAlbum: true } })
+                                    navigate(data?.link?.split('.')[0], {
+                                        state: { playAlbum: true, albumId: data?.encodeId },
+                                    })
+                                    // dispatch(musicAction.setRecentSongs())
                                 }}
                                 className="w-full h-full flex justify-center items-center"
                             >
