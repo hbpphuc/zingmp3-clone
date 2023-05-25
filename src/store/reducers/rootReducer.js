@@ -11,7 +11,7 @@ const appConfig = { ...commonConfig, key: 'APP', whitelist: ['isPLayingBar'] }
 const musicConfig = {
     ...commonConfig,
     key: 'MUSIC',
-    whitelist: ['curSongId', 'curSongData', 'curAlbumId', 'recentSongs'],
+    whitelist: ['curSongId', 'curSongData', 'curAlbumId', 'recentSongs', 'searchData'],
 }
 
 const rootReducer = combineReducers({

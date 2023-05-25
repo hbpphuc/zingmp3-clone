@@ -144,7 +144,7 @@ const SearchAll = () => {
                         searchData?.artists
                             .filter((i, index) => index <= 4)
                             .map((item) => (
-                                <div key={item.encodeId} className="w-[25%] xl:w-[20%] artist">
+                                <div key={item.id} className="w-[25%] xl:w-[20%] artist">
                                     <Artist data={item} />
                                 </div>
                             ))}
