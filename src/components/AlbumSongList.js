@@ -8,7 +8,10 @@ const { BsDot } = icons
 
 const AlbumSongList = () => {
     const { listSong } = useSelector((state) => state.music)
+    console.log(listSong)
     let totalSongDuration = listSong?.reduce((acc, curr) => acc + curr.duration, 0)
+
+    console.log(totalSongDuration)
 
     return (
         <div className="w-full mb-[10px] text-xs text-[#ffffff80] font-medium">
@@ -22,16 +25,19 @@ const AlbumSongList = () => {
                     <AlbumSongItem key={item.encodeId} songData={item} />
                 ))}
             </div>
-            <div className="w-full mt-4 flex items-center text-[#ffffff80] text-[13px] leading-[18px]">
-                <span>{listSong?.length} bài hát</span>
-                <span>
-                    <BsDot size={20} />
-                </span>
-                <span>
-                    {moment.utc(totalSongDuration * 1000).format('h') + ' giờ'}{' '}
-                    {moment.utc(totalSongDuration * 1000).format('mm') + ` phút`}
-                </span>
-            </div>
+            {listSong.length > 1 && (
+                <div className="w-full mt-4 flex items-center text-[#ffffff80] text-[13px] leading-[18px]">
+                    <span>{listSong?.length} bài hát</span>
+                    <span>
+                        <BsDot size={20} />
+                    </span>
+                    <span>
+                        {totalSongDuration * 1000 > 3600000 &&
+                            moment.utc(totalSongDuration * 1000).format('h') + ' giờ'}{' '}
+                        {moment.utc(totalSongDuration * 1000).format('mm') + ` phút`}
+                    </span>
+                </div>
+            )}
         </div>
     )
 }

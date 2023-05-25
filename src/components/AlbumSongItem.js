@@ -10,8 +10,8 @@ const { FiMusic, BsCaretDownFill, BsCaretUpFill, TbMinus } = icons
 const AlbumSongItem = ({ songData, isHideNoteIcon, isHideAlbumTitle, order, rankStt, isWeekChart }) => {
     const { curSongId } = useSelector((state) => state.music)
     const { currentWidth } = useSelector((state) => state.app)
-
     const dispatch = useDispatch()
+
     return (
         <div
             onClick={(e) => {
@@ -100,7 +100,7 @@ const AlbumSongItem = ({ songData, isHideNoteIcon, isHideAlbumTitle, order, rank
                                     <Link
                                         onClick={(e) => e.stopPropagation()}
                                         to={item.link}
-                                        key={item.encodeId}
+                                        key={item.id}
                                         className="whitespace-nowrap cursor-pointer hover:text-purple-hover"
                                     >
                                         {item.name}

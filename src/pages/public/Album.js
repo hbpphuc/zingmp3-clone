@@ -27,12 +27,14 @@ const Album = () => {
             if (res?.err === 0) {
                 setPlaylistData(res?.data)
                 dispatch(musicAction.setCurAlbumId(res?.data?.encodeId))
-                dispatch(musicAction.setPlaylist(res?.data?.song.items))
+                dispatch(musicAction.setPlaylist(res?.data?.song?.items))
             }
         }
 
         fetchDetailPlaylist()
     }, [pid])
+
+    console.log(playlistData)
 
     useEffect(() => {
         if (location.state?.playAlbum) {
@@ -42,6 +44,13 @@ const Album = () => {
             dispatch(musicAction.setRecentSongs({ data: curSongData }))
         }
     }, [pid, playlistData])
+
+    const handleClickPlay = () => {
+        dispatch(musicAction.setCurSongId(playlistData?.song?.items[0]?.encodeId))
+        dispatch(musicAction.setCurAlbumId(location.state?.albumId))
+        dispatch(musicAction.setPlaying(true))
+        dispatch(musicAction.setRecentSongs({ data: curSongData }))
+    }
 
     useEffect(() => {
         ref.current.scrollIntoView()
@@ -88,17 +97,20 @@ const Album = () => {
                                 </div>
                             ) : (
                                 <div className="w-[50px] h-[50px] p-[5px] flex justify-center items-center rounded-full border-2 border-white hover:opacity-90">
-                                    <button className="w-full h-full flex justify-center items-center">
+                                    <button
+                                        onClick={handleClickPlay}
+                                        className="w-full h-full flex justify-center items-center"
+                                    >
                                         <TbPlayerPlayFilled className="w-full h-full p-[3px]" />
                                     </button>
                                 </div>
                             )}
                         </div>
                     </div>
-                    <div className="flex-1 mt-3 flex flex-col items-start">
+                    <div className="flex-1 mt-3 flex flex-col xl:items-center">
                         <div className="flex flex-col xl:items-start">
-                            <h3 className="xl:text-center text-xl font-bold">{playlistData?.title}</h3>
-                            <div className="flex flex-col xl:items-center">
+                            <h3 className="w-full xl:text-center text-xl font-bold">{playlistData?.title}</h3>
+                            <div className="w-full flex flex-col xl:items-center justify-center">
                                 <p className="text-xs text-[#ffffff80] leading-[1.75]">
                                     Cập nhật: {moment.unix(playlistData?.contentLastUpdate).format('DD/MM/YYYY')}
                                 </p>
@@ -117,7 +129,7 @@ const Album = () => {
                                     {Math.floor(playlistData?.like / 1000)}K người yêu thích
                                 </p>
                             </div>
-                            {currentWidth < 1280 && (
+                            {playlistData.sortDescription && currentWidth < 1280 && (
                                 <div className="mb-[10px] mt-4">
                                     <span className="text-sm text-[#ffffff80]">Lời tựa </span>
                                     <span className="text-sm text-white text-ellipsis line-clamp-2 overflow-hidden">
@@ -129,7 +141,7 @@ const Album = () => {
                     </div>
                 </div>
                 <div className="w-full xl:w-[70%]">
-                    {currentWidth >= 1280 && (
+                    {playlistData.sortDescription && currentWidth >= 1280 && (
                         <div className="mb-[10px]">
                             <span className="text-sm text-[#ffffff80]">Lời tựa </span>
                             <span className="text-sm text-white text-ellipsis line-clamp-3 overflow-hidden">

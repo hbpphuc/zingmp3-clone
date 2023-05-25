@@ -12,11 +12,8 @@ const PlaylistItem = ({ data, top100 }) => {
     const [isHover, setIsHover] = useState(false)
     const imageRef = useRef()
 
-    const { recentSongs } = useSelector((state) => state.music)
-    const dispatch = useDispatch()
-
     const handleGetPath = (item) => {
-        navigate(item?.link?.split('.')[0], { state: { playAlbum: false } })
+        navigate(item?.link?.split('.')[0], { state: { playAlbum: false, albumId: data?.encodeId } })
     }
 
     const handleImageEnter = () => {
@@ -57,7 +54,6 @@ const PlaylistItem = ({ data, top100 }) => {
                                     navigate(data?.link?.split('.')[0], {
                                         state: { playAlbum: true, albumId: data?.encodeId },
                                     })
-                                    // dispatch(musicAction.setRecentSongs())
                                 }}
                                 className="w-full h-full flex justify-center items-center"
                             >
