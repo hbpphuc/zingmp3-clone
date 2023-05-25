@@ -78,7 +78,7 @@ const Player = () => {
     }, [debounceSongId])
 
     useEffect(() => {
-        if (isPlaying) {
+        if (songinfo && isPlaying) {
             audio.play()
             intervalId = setInterval(() => {
                 let percent = Math.round((audio?.currentTime * 10000) / songinfo.duration) / 100
@@ -189,7 +189,6 @@ const Player = () => {
             dispatch(musicAction.setPlaying(true))
         } else {
             e.preventDefault()
-            alert('aaa')
         }
     }
 

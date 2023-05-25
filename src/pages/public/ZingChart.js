@@ -3,13 +3,15 @@ import { Link } from 'react-router-dom'
 import { Chart } from 'chart.js/auto'
 import { Line } from 'react-chartjs-2'
 import * as homeApi from '../../apis/homeApi'
-import { AlbumSongItem, Button, Icons, RankList } from '../../components'
-import { useSelector } from 'react-redux'
+import * as homeAction from '../../store/actions'
+import { AlbumSongItem, Button, Icons, Loading, RankList } from '../../components'
+import { useDispatch, useSelector } from 'react-redux'
 
 const { MdPlayCircle } = Icons
 
 const ZingChart = () => {
-    const { currentWidth } = useSelector((state) => state.app)
+    const { isLoading, currentWidth } = useSelector((state) => state.app)
+    const dispatch = useDispatch()
     const [ZChart, setZChart] = useState(null)
     const [data, setData] = useState(null)
 
@@ -45,7 +47,9 @@ const ZingChart = () => {
 
     useEffect(() => {
         const fetchChart = async () => {
+            dispatch(homeAction.loading(true))
             const result = await homeApi.getChartHome()
+            dispatch(homeAction.loading(false))
             setZChart(result.data)
         }
         fetchChart()
@@ -77,6 +81,13 @@ const ZingChart = () => {
 
     return (
         <div className="w-full h-full flex flex-col mt-[110px]">
+            {isLoading && (
+                <div className="absolute top-0 right-0 bottom-0 left-0 bg-[#170f23] z-10">
+                    <div className="w-creen h-screen flex justify-center items-center ">
+                        <Loading />
+                    </div>
+                </div>
+            )}
             <div className="w-full h-full mb-10 flex items-center gap-3 text-[40px] font-bold leading-normal text-white">
                 <h3 title="24H" className="zingchart-text cursor-text">
                     #zingchart
