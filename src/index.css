@@ -1,3 +1,237 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
 @tailwind base;
+@layer base {
+    :root {
+        --purple-primary: #9b4de0;
+        --text-purple: #c273ed;
+    }
+
+    * {
+        font-family: "Inter", sans-serif;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    html {
+        overflow-y: overlay;
+    }
+
+    html ::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    html ::-webkit-scrollbar-thumb {
+        border-radius: 4px;
+        background-color: #ffffff4d;
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+    }
+
+    html ::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset #fff;
+        border-radius: 4px;
+    }
+}
+
 @tailwind components;
+@layer components {
+    .purple-hover {
+        color: var(--text-purple);
+    }
+
+    .text-purple-hover {
+        color: var(--text-purple);
+        text-decoration: underline;
+    }
+
+    .button-player {
+        background-color: #ffffff1d;
+        border-radius: 50%;
+    }
+
+    .play-pause-hover {
+        border-color: var(--text-purple);
+        color: var(--text-purple);
+    }
+
+    .thumbnailM-hover {
+        transform: scale(1.1) translateZ(0);
+    }
+
+    .transition-img {
+        transition: transform 0.7s;
+    }
+
+    .progressbar:hover .thumb {
+        height: 5px;
+    }
+
+    .active-song {
+        background-color: #ffffff26;
+    }
+}
+
+.slick-list,
+.slick-track {
+    display: flex !important;
+    justify-content: space-between;
+    max-height: 100% !important;
+}
+
+.slick-slide {
+    margin: 0 10px !important;
+}
+
+.main-header {
+    @apply w-[calc(100%_-_70px)] min-[1133px]:w-[calc(100%_-_240px)] h-[70px] px-[59px] flex items-center fixed left-[70px] min-[1133px]:left-[240px] top-0 right-0 text-white z-50;
+}
+
+.is-collapse {
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+    background-color: #34224f;
+    border: 1px solid transparent;
+}
+
+.icon + .title,
+.title + .icon {
+    margin-left: 4px;
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.btn {
+    @apply flex justify-center items-center py-1 px-6 rounded-full text-white font-normal border border-[#ffffff1a] hover:opacity-90 bg-transparent;
+}
+
+.btn-active {
+    @apply border-[#9b4de0] hover:opacity-90 bg-[#9b4de0] text-white;
+}
+
+.zingchart-text {
+    background: radial-gradient(50% 124.93% at 95.86% -10%, #3efad9 0, hsla(0, 0%, 100%, 0) 100%),
+        linear-gradient(91.56deg, #ff9357 1.54%, #9100ff 98.71%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.zingchart-top-alpha::before {
+    content: "";
+    position: absolute;
+    left: -20px;
+    top: -50px;
+    width: 230px;
+    height: 143.18px;
+    -webkit-filter: blur(150px);
+    filter: blur(150px);
+    border-radius: 115px;
+    transform: rotate(30deg);
+    background: #ba53f5;
+}
+
+.zingchart-top-alpha::after {
+    content: "";
+    position: absolute;
+    left: 152px;
+    bottom: -30px;
+    opacity: 0.7;
+    width: 230px;
+    height: 143.18px;
+    -webkit-filter: blur(150px);
+    filter: blur(150px);
+    border-radius: 115px;
+    transform: rotate(30deg);
+    background: #ba53f5;
+}
+
+.zingchart-bottom-alpha::after {
+    content: "";
+    position: absolute;
+    left: 60%;
+    right: 0;
+    top: -100px;
+    height: 250px;
+    background: #ba53f5;
+    -webkit-filter: blur(230px);
+    filter: blur(230px);
+}
+
+.bg-blur {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 0;
+    background: url(https://zjs.zmdcdn.me/zmp3-desktop/releases/v1.9.33/static/media/week-chart-bg.edf332e5.jpg)
+        top/cover no-repeat;
+    -webkit-filter: grayscale(1);
+    filter: grayscale(1);
+}
+
+.bg-alpha {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: #201335e6;
+}
+
+.zingchart-order {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-text-stroke: 1.5px #fff;
+    opacity: 0.7;
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 1;
+    text-align: center;
+    color: rgba(74, 144, 226, 0);
+    font-family: "Roboto", sans-serif !important;
+    white-space: nowrap;
+}
+
+.zc-order-1 {
+    -webkit-text-stroke: 1px #4a90e2;
+    opacity: 1;
+}
+.zc-order-2 {
+    -webkit-text-stroke: 1px #50e3c2;
+    opacity: 1;
+}
+.zc-order-3 {
+    -webkit-text-stroke: 1px #e35050;
+    opacity: 1;
+}
+
+.search-filter::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    top: 170%;
+    border-bottom: 2px solid #9b4de0;
+}
+
+.btn-bg-scale {
+    background-color: #9b4de0;
+    border: 1px solid #9b4de0;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: transform 0.3s;
+    opacity: 0;
+}
+
+.btn-was-hover:hover + .btn-bg-scale {
+    transform: scale(1);
+    opacity: 1;
+}
+
 @tailwind utilities;
