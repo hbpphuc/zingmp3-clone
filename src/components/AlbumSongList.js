@@ -8,10 +8,7 @@ const { BsDot } = icons
 
 const AlbumSongList = () => {
     const { listSong } = useSelector((state) => state.music)
-    console.log(listSong)
     let totalSongDuration = listSong?.reduce((acc, curr) => acc + curr.duration, 0)
-
-    console.log(totalSongDuration)
 
     return (
         <div className="w-full mb-[10px] text-xs text-[#ffffff80] font-medium">
