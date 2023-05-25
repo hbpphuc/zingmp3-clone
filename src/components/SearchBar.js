@@ -7,6 +7,7 @@ import _ from 'lodash'
 import icons from './Icons'
 import * as musicApi from '../apis/musicApi'
 import * as musicAction from '../store/actions'
+import * as homeAction from '../store/actions'
 import routes from '../utils/routes'
 
 const { TfiSearch, CgClose } = icons
@@ -32,8 +33,10 @@ const SearchBar = () => {
             if (keyword === '' || keyword.startsWith(' ')) {
                 e.preventDefault()
             } else {
+                dispatch(homeAction.loading(true))
                 dispatch(musicAction.search(keyword))
-                if (!_.isEmpty(searchData)) {
+                dispatch(homeAction.loading(false))
+                if (!_.isEmpty(await searchData)) {
                     navigate({
                         pathname: `${routes.SEARCH}/${routes.SEARCH_ALL}`,
                         search: createSearchParams({
@@ -43,7 +46,7 @@ const SearchBar = () => {
                     setIsFocus(false)
                     searchInputRef.current.blur()
                 } else {
-                    alert('Chưa load xong dữ liệu hoặc không có dữ liệu')
+                    e.preventDefault()
                 }
             }
         }

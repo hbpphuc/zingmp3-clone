@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { formatFollow } from '../../utils/helper'
-import { AlbumSongItem, Artist, Icons } from '../../components'
+import { AlbumSongItem, Artist, Icons, Loading } from '../../components'
 import PlaylistItem from '../../components/PlaylistItem'
 import { Link } from 'react-router-dom'
 
@@ -9,10 +9,17 @@ const { MdOutlineArrowForwardIos } = Icons
 
 const SearchAll = () => {
     const { searchData } = useSelector((state) => state.music)
-    const { currentWidth } = useSelector((state) => state.app)
+    const { isLoading, currentWidth } = useSelector((state) => state.app)
 
     return (
-        <div className="w-full h-[400px] flex flex-col">
+        <div className="w-full h-full flex flex-col">
+            {isLoading && (
+                <div className="absolute top-0 right-0 bottom-0 left-0 bg-[#170f23] z-10">
+                    <div className="w-creen h-screen flex justify-center items-center ">
+                        <Loading />
+                    </div>
+                </div>
+            )}
             <div className="w-full flex flex-col justify-start items-start">
                 <h3 className="flex justify-start items-center mb-5 text-xl font-bold">Nổi Bật</h3>
                 <div className="w-full flex justify-between items-center gap-7">

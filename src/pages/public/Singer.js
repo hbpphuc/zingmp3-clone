@@ -1,9 +1,10 @@
 import Tippy from '@tippyjs/react'
 import React, { useEffect, useRef, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import * as musicApi from '../../apis/musicApi'
-import { AlbumSongItem, Artist, Button, Icons } from '../../components'
+import * as homeAction from '../../store/actions'
+import { AlbumSongItem, Artist, Button, Icons, Loading } from '../../components'
 import { ZingAward } from '../../components/Images'
 import PlaylistItem from '../../components/PlaylistItem'
 
@@ -11,17 +12,20 @@ const { AiOutlineUserAdd, TbPlayerPlayFilled, TbPlayerPauseFilled, MdOutlineArro
 
 const Singer = () => {
     const { singer } = useParams()
-    const { currentWidth } = useSelector((state) => state.app)
+    const { currentWidth, isLoading } = useSelector((state) => state.app)
+    const dispatch = useDispatch()
 
     const [artist, setArtist] = useState(null)
     const ref = useRef()
 
     useEffect(() => {
         const fetchArtist = async () => {
+            dispatch(homeAction.loading(true))
             const result = await musicApi.apiGetArtist(singer)
             if (result.err === 0) {
                 setArtist(result.data)
             }
+            dispatch(homeAction.loading(false))
         }
         singer && fetchArtist()
     }, [singer])
@@ -32,6 +36,13 @@ const Singer = () => {
 
     return (
         <div ref={ref} className="w-full h-auto flex flex-col">
+            {isLoading && (
+                <div className="absolute top-0 right-0 bottom-0 left-0 bg-[#170f23] z-10">
+                    <div className="w-creen h-screen flex justify-center items-center ">
+                        <Loading />
+                    </div>
+                </div>
+            )}
             <div className="w-full h-[360px] mb-[30px]">
                 <div className="flex flex-col absolute left-0 right-0 top-0">
                     <img src={artist?.cover} alt={artist?.alias} className="w-full object-cover" />

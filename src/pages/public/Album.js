@@ -6,6 +6,7 @@ import { Audio } from 'react-loader-spinner'
 import * as musicApi from '../../apis/musicApi'
 import * as musicAction from '../../store/actions'
 import { AlbumSongList, Icons, Loading } from '../../components'
+import { setPlaying } from '../../store/actions'
 
 const { TbPlayerPlayFilled } = Icons
 
@@ -35,6 +36,7 @@ const Album = () => {
     }, [pid])
 
     useEffect(() => {
+        dispatch(setPlaying(false))
         if (location.state?.playAlbum) {
             dispatch(musicAction.setCurSongId(playlistData?.song?.items[0]?.encodeId))
             dispatch(musicAction.setCurAlbumId(location.state?.albumId))
@@ -78,7 +80,7 @@ const Album = () => {
                         <div
                             ref={overlayRef}
                             className={`w-full h-full flex justify-center items-center absolute top-0 left-0 right-0 bottom-0 hover:bg-[#0000004a] cursor-pointer ${
-                                isPlaying && 'rounded-full'
+                                isPlaying ? 'rounded-full' : ''
                             }`}
                         >
                             {isPlaying ? (
@@ -116,7 +118,7 @@ const Album = () => {
                                     {playlistData?.artists?.map((item) => (
                                         <Link
                                             to={item.link}
-                                            key={item.encodeId}
+                                            key={item.id}
                                             className="mr-1 cursor-pointer hover:text-purple-hover"
                                         >
                                             {item.name}

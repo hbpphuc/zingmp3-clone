@@ -1,12 +1,33 @@
 import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux'
-import { Slider, Playlist, NewRelease, HWeekChart, HZingChart } from '../../components'
+import { useDispatch, useSelector } from 'react-redux'
+import * as homeApi from '../../apis/homeApi'
+import * as homeAction from '../../store/actions'
+import { Slider, Playlist, NewRelease, HWeekChart, HZingChart, Loading } from '../../components'
 
 const Home = () => {
-    const { hEditorTheme, hEditorTheme2, hArtistTheme, weekChart, h100, hAlbum } = useSelector((state) => state.app)
+    const { isLoading, hEditorTheme, hEditorTheme2, hArtistTheme, weekChart, h100, hAlbum } = useSelector(
+        (state) => state.app,
+    )
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        const fetchHome = async () => {
+            dispatch(homeAction.loading(true))
+            await homeApi.getHome()
+            dispatch(homeAction.loading(false))
+        }
+        fetchHome()
+    }, [])
 
     return (
-        <div>
+        <div className="w-full flex flex-col text-white relative">
+            {isLoading && hEditorTheme && (
+                <div className="absolute top-0 right-0 bottom-0 left-0 bg-[#170f23] z-50 mx-[-50px]">
+                    <div className="w-creen h-screen flex justify-center items-center ">
+                        <Loading />
+                    </div>
+                </div>
+            )}
             <Slider />
             <NewRelease />
             <Playlist data={hEditorTheme} />
