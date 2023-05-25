@@ -34,8 +34,6 @@ const Album = () => {
         fetchDetailPlaylist()
     }, [pid])
 
-    console.log(playlistData)
-
     useEffect(() => {
         if (location.state?.playAlbum) {
             dispatch(musicAction.setCurSongId(playlistData?.song?.items[0]?.encodeId))
